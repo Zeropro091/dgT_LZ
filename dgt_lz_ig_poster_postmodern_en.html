@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DGT_LZ Post-Modern Poster (EN)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,900;1,900&family=Inter:wght@400;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --obsidian-dark: #1A1A1A;
+            --pristine-white: #FDFBF7;
+            --terracotta-rust: #D46B4A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #222;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            padding: 50px 0;
+        }
+
+        /* IG Post Container */
+        .poster {
+            width: 1080px;
+            height: 1080px;
+            background-color: var(--obsidian-dark);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            color: var(--pristine-white);
+            box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+        }
+
+        /* Post-Modern Grainy Texture Filter */
+        .noise {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 10;
+            opacity: 0.08;
+            pointer-events: none;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+        }
+
+        /* Deconstructed Grid */
+        .grid-block {
+            position: absolute;
+            border: 1px solid rgba(253, 251, 247, 0.1);
+        }
+
+        /* Layered Background Text */
+        .bg-text {
+            position: absolute;
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 320px;
+            line-height: 0.8;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(253, 251, 247, 0.05);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) rotate(-15deg);
+            white-space: nowrap;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Main Branding Block (Brutalist) */
+        .brand-block {
+            position: absolute;
+            top: 60px;
+            left: 60px;
+            background: var(--terracotta-rust);
+            color: var(--obsidian-dark);
+            padding: 15px 30px;
+            font-weight: 800;
+            font-size: 24px;
+            letter-spacing: -0.02em;
+            z-index: 5;
+            transform: rotate(-2deg);
+        }
+
+        /* Deconstructed Headline */
+        .headline-container {
+            position: relative;
+            margin-top: 250px;
+            margin-left: 80px;
+            z-index: 2;
+        }
+
+        .word-intelligence {
+            font-family: 'Playfair Display', serif;
+            font-size: 160px;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.8;
+            display: block;
+            letter-spacing: -0.05em;
+        }
+
+        .word-augmented {
+            font-family: 'Inter', sans-serif;
+            font-size: 140px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--terracotta-rust);
+            display: block;
+            margin-left: 120px;
+            margin-top: -20px;
+            mix-blend-mode: screen;
+            letter-spacing: -0.05em;
+        }
+
+        /* Floating Info Panels */
+        .info-panel {
+            position: absolute;
+            bottom: 300px;
+            right: 80px;
+            width: 400px;
+            background: rgba(253, 251, 247, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 40px;
+            border-left: 8px solid var(--terracotta-rust);
+            z-index: 3;
+        }
+
+        .info-panel p {
+            font-size: 28px;
+            line-height: 1.2;
+            font-weight: 400;
+        }
+
+        /* CTA: The "Post-Modern" Sticker */
+        .cta-sticker {
+            position: absolute;
+            bottom: 100px;
+            left: 100px;
+            width: 320px;
+            height: 320px;
+            background: var(--pristine-white);
+            color: var(--obsidian-dark);
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            transform: rotate(10deg);
+            z-index: 4;
+            padding: 20px;
+            box-shadow: 20px 20px 0px var(--terracotta-rust);
+        }
+
+        .cta-sticker .top {
+            font-size: 20px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 10px;
+        }
+
+        .cta-sticker .middle {
+            font-family: 'Playfair Display', serif;
+            font-size: 45px;
+            font-weight: 900;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .cta-sticker .bottom {
+            font-size: 16px;
+            background: var(--obsidian-dark);
+            color: var(--pristine-white);
+            padding: 5px 15px;
+            font-weight: 600;
+        }
+
+        /* Abstract Lines */
+        .abstract-line {
+            position: absolute;
+            background: var(--terracotta-rust);
+            z-index: 1;
+        }
+
+        /* Footer Details */
+        .footer-strip {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 80px;
+            background: var(--pristine-white);
+            color: var(--obsidian-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 60px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.3em;
+            font-size: 18px;
+            z-index: 5;
+        }
+
+        .dot {
+            width: 20px;
+            height: 20px;
+            background: var(--terracotta-rust);
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        /* Download Button Styling */
+        .download-btn {
+            margin-top: 40px;
+            padding: 20px 40px;
+            background-color: var(--terracotta-rust);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="poster" id="poster">
+        <div class="noise"></div>
+        
+        <!-- Background Deconstruction -->
+        <div class="bg-text">DGT_LZ</div>
+        <div class="grid-block" style="width: 500px; height: 500px; top: -100px; right: -100px; border-radius: 50%;"></div>
+        <div class="grid-block" style="width: 300px; height: 1000px; top: 0; left: 400px; border-right: 1px solid rgba(253, 251, 247, 0.1);"></div>
+        
+        <!-- Brand Block -->
+        <div class="brand-block">SYSTEM_LZ // 2026</div>
+
+        <!-- Deconstructed Headline -->
+        <div class="headline-container">
+            <span class="word-intelligence">INTELLI-<br>GENCE</span>
+            <span class="word-augmented">AUGMENTED</span>
+        </div>
+
+        <!-- Abstract Graphics -->
+        <div class="abstract-line" style="width: 400px; height: 2px; top: 480px; left: 80px;"></div>
+        <div class="abstract-line" style="width: 2px; height: 300px; top: 250px; left: 600px;"></div>
+
+        <!-- Info Panel -->
+        <div class="info-panel">
+            <p>Business Automation.<br>Transforming legacy systems into autonomous AI infrastructure.</p>
+        </div>
+
+        <!-- CTA Circle Sticker -->
+        <div class="cta-sticker">
+            <div class="top">Claim Now</div>
+            <div class="middle">AI<br>Blueprint</div>
+            <div class="bottom">AT NO COST</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer-strip">
+            <div><span class="dot"></span>DGT_LZ AGENCY</div>
+            <div>BALI // GLOBAL</div>
+            <div>DGT-LZ.AGENCY</div>
+        </div>
+    </div>
+
+    <button class="download-btn" onclick="downloadPoster()">Download Post-Modern PNG</button>
+
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
+    <script>
+        function downloadPoster() {
+            const poster = document.getElementById('poster');
+            html2canvas(poster, {
+                scale: 2,
+                backgroundColor: '#1A1A1A',
+                logging: false,
+                useCORS: true
+            }).then(canvas => {
+                const link = document.createElement('a');
+                link.download = 'dgt_lz_postmodern_poster_en.png';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            });
+        }
+    </script>
+</body>
+</html>
