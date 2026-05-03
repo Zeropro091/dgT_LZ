@@ -52,6 +52,13 @@
 - **Logging**: Every session must be logged to `gemini memory` in the user's note-taking system.
 - **Historical Access**: Always read the most recent session log before starting work.
 
+### Memory Restoration (For New Environments)
+To "copy" this session's state in a new environment:
+1.  **Clone** the repository.
+2.  **Restore Note-Taking App**: Ensure the local Next.js note-taking app is installed at `C:\Users\JayamAirways\note-taking\note-taking-app`.
+3.  **Sync Logs**: Copy the files from `.gemini/memory/` in this repo to `C:\Users\JayamAirways\note-taking\note-taking-app\data\notes\gemini memory\`.
+4.  **Run Service**: Execute `npm run dev -- -p 3001` in the note-taking app directory to enable MCP connectivity.
+
 ---
 **Last Updated**: 2026-05-03
 **Status**: Intelligence Augmented.
