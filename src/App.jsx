@@ -1304,8 +1304,115 @@ const Kontak = ({ t, objective, setObjective }) => {
 };
 
 
+// --- DASHBOARD COMPONENT ---
+const Dashboard = ({ onBackHome }) => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    if (username === 'admin' && password === '123123') {
+      setIsLoggedIn(true);
+      setError('');
+    } else {
+      setError('Kredensial tidak valid / Invalid credentials');
+    }
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+    setUsername('');
+    setPassword('');
+    onBackHome();
+  };
+
+  if (isLoggedIn) {
+    return (
+      <div className="min-h-screen bg-[#0A0A0A] flex flex-col justify-between p-6 relative font-sans">
+        <div className="absolute top-6 right-6 z-50">
+          <button 
+            onClick={handleLogout}
+            className="border border-[#D46B4A]/40 hover:border-[#D46B4A] hover:bg-[#D46B4A]/10 text-[#D46B4A] px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 rounded"
+          >
+            Logout
+          </button>
+        </div>
+        
+        <div className="flex-grow flex items-center justify-center">
+          <h1 className="text-3xl md:text-5xl font-mono text-[#FAFAFA] tracking-widest uppercase">
+            dashboard lol
+          </h1>
+        </div>
+        
+        <div className="w-full flex justify-between items-center text-[10px] text-[#737373] font-mono uppercase tracking-[0.2em] border-t border-[#151515] pt-4">
+          <span>DGT_LZ // SECURE CORE</span>
+          <span>ADMIN SESSION ACTIVE</span>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center p-6 relative font-sans">
+      <button 
+        onClick={onBackHome}
+        className="absolute top-6 left-6 text-[#737373] hover:text-[#FAFAFA] font-mono text-xs uppercase tracking-widest transition-colors flex items-center gap-2"
+      >
+        ← Home
+      </button>
+
+      <div className="w-full max-w-sm border border-[#151515] bg-[#050505] p-8 flex flex-col gap-6 rounded shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
+        <div className="flex flex-col gap-1 border-b border-[#151515] pb-4">
+          <span className="text-[10px] font-mono text-[#D46B4A] uppercase tracking-widest font-bold">SYSTEM ACCESS</span>
+          <h2 className="text-xl font-clash font-extrabold text-[#FAFAFA]">DGT_LZ Dashboard</h2>
+        </div>
+
+        <form onSubmit={handleLogin} className="flex flex-col gap-4">
+          <div className="flex flex-col gap-2">
+            <label className="text-[9px] text-[#737373] font-mono uppercase tracking-wider font-bold">Username</label>
+            <input 
+              type="text" 
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username" 
+              className="bg-[#0A0A0A] border border-[#151515] focus:border-[#D46B4A] outline-none py-2 px-3 text-[#FAFAFA] text-xs font-mono transition-all duration-300 placeholder:text-[#737373]/50" 
+              required
+            />
+          </div>
+
+          <div className="flex flex-col gap-2">
+            <label className="text-[9px] text-[#737373] font-mono uppercase tracking-wider font-bold">Password</label>
+            <input 
+              type="password" 
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password" 
+              className="bg-[#0A0A0A] border border-[#151515] focus:border-[#D46B4A] outline-none py-2 px-3 text-[#FAFAFA] text-xs font-mono transition-all duration-300 placeholder:text-[#737373]/50" 
+              required
+            />
+          </div>
+
+          {error && (
+            <span className="text-[10px] text-red-500 font-mono tracking-wide">{error}</span>
+          )}
+
+          <button 
+            type="submit" 
+            className="w-full py-3 bg-[#D46B4A] hover:bg-[#c25a3a] text-white font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 rounded mt-2"
+          >
+            Access Dashboard
+          </button>
+        </form>
+      </div>
+    </div>
+  );
+};
+
 // --- KOMPONEN UTAMA (APP) ---
 const App = () => {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname);
   const [isLoaded, setIsLoaded] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [showNav, setShowNav] = useState(true);
@@ -1313,6 +1420,19 @@ const App = () => {
   const lastScrollY = useRef(0);
   const [objective, setObjective] = useState('');
   const [activeSection, setActiveSection] = useState('manifesto');
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setCurrentPath(window.location.pathname);
+    };
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
+
+  const handleBackHome = () => {
+    window.history.pushState({}, '', '/');
+    setCurrentPath('/');
+  };
 
   const handleSelectBundle = (bundleName, categoryName) => {
     setObjective(lang === 'id' 
@@ -1425,6 +1545,10 @@ const App = () => {
 
     return () => observer.disconnect();
   }, [isLoaded, lang]);
+
+  if (currentPath === '/dashboard' || currentPath === '/dashboard/') {
+    return <Dashboard onBackHome={handleBackHome} />;
+  }
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-[#FAFAFA] font-sans overflow-x-hidden selection:bg-[#D46B4A] selection:text-white flex flex-col relative uppercase-lines">
