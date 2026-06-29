@@ -1800,11 +1800,27 @@ const App = () => {
               <span className="text-[#2A2A2A]">|</span>
               <button onClick={() => setLang('id')} className={`transition-colors hover:text-[#D46B4A] ${lang === 'id' ? 'text-[#FAFAFA]' : 'text-[#737373]'}`}>ID</button>
             </div>
+
+            {/* Consult for Free CTA Button (Desktop) */}
+            <button
+              onClick={() => scrollToSection('kontak')}
+              className="ml-4 text-[10px] xl:text-[11px] uppercase tracking-[0.15em] font-mono font-bold bg-[#D46B4A] text-white px-4 py-2 rounded hover:bg-[#c25a3a] transition-all duration-300 shadow-[0_4px_15px_rgba(212,107,74,0.2)] hover:shadow-[0_6px_20px_rgba(212,107,74,0.4)] hover:-translate-y-0.5"
+            >
+              {lang === 'en' ? 'Consult for Free' : 'Konsultasi Gratis'}
+            </button>
           </div>
 
-          <div className="lg:hidden flex items-center gap-6">
+          <div className="lg:hidden flex items-center gap-4 sm:gap-6">
+            {/* Consult for Free CTA Button (Mobile) */}
+            <button
+              onClick={() => scrollToSection('kontak')}
+              className="text-[9px] uppercase tracking-wider font-mono font-bold bg-[#D46B4A] text-white px-2.5 py-1.5 rounded hover:bg-[#c25a3a] transition-all"
+            >
+              {lang === 'en' ? 'Consult' : 'Konsultasi'}
+            </button>
+
             {/* Lang Switcher (Mobile) */}
-            <div className="flex items-center gap-2 text-[10px] uppercase font-mono font-bold tracking-widest border-r border-[#2A2A2A] pr-6">
+            <div className="flex items-center gap-2 text-[10px] uppercase font-mono font-bold tracking-widest border-r border-[#2A2A2A] pr-4 sm:pr-6">
               <button onClick={() => setLang('en')} className={`transition-colors hover:text-[#D46B4A] ${lang === 'en' ? 'text-[#FAFAFA]' : 'text-[#737373]'}`}>EN</button>
               <span className="text-[#2A2A2A]">|</span>
               <button onClick={() => setLang('id')} className={`transition-colors hover:text-[#D46B4A] ${lang === 'id' ? 'text-[#FAFAFA]' : 'text-[#737373]'}`}>ID</button>
