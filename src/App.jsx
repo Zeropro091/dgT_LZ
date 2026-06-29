@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect, useMemo } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
@@ -1416,7 +1416,13 @@ const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [showNav, setShowNav] = useState(true);
-  const [lang, setLang] = useState('en'); // Default to global EN until detected
+  const [lang, setLang] = useState(() => {
+    if (typeof navigator !== 'undefined') {
+      const userLang = navigator.language || navigator.userLanguage || '';
+      return userLang.toLowerCase().includes('id') ? 'id' : 'en';
+    }
+    return 'en';
+  });
   const lastScrollY = useRef(0);
   const [objective, setObjective] = useState('');
   const [activeSection, setActiveSection] = useState('manifesto');
@@ -1442,16 +1448,6 @@ const App = () => {
     scrollToSection('kontak');
   };
 
-  // Auto-Detect Language on Mount
-  useEffect(() => {
-    const userLang = navigator.language || navigator.userLanguage;
-    if (userLang.toLowerCase().includes('id')) {
-      setLang('id');
-    } else {
-      setLang('en');
-    }
-  }, []);
-
   useEffect(() => {
     // Inisialisasi Lenis Smooth Scroll
     const lenis = new Lenis({
@@ -1472,7 +1468,7 @@ const App = () => {
     }
     requestAnimationFrame(raf);
 
-    setIsLoaded(true);
+    const loadFrame = requestAnimationFrame(() => setIsLoaded(true));
 
     let ticking = false;
     const controlNavbar = () => {
@@ -1494,6 +1490,7 @@ const App = () => {
     window.addEventListener('scroll', controlNavbar, { passive: true });
     return () => {
       window.removeEventListener('scroll', controlNavbar);
+      cancelAnimationFrame(loadFrame);
       lenis.destroy();
     }
   }, []);
@@ -1508,7 +1505,7 @@ const App = () => {
 
   const t = contentLocales[lang];
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: 'manifesto', label: t.nav.manifesto },
     { id: 'layanan', label: t.nav.layanan },
     { id: 'bundel', label: t.nav.bundel },
@@ -1519,7 +1516,7 @@ const App = () => {
     { id: 'doktrin', label: t.nav.doktrin },
     { id: 'faq', label: t.nav.faq },
     { id: 'kontak',  label: t.nav.kontak }
-  ];
+  ], [t]);
 
   useEffect(() => {
     if (!isLoaded) return;
@@ -1544,7 +1541,7 @@ const App = () => {
     });
 
     return () => observer.disconnect();
-  }, [isLoaded, lang]);
+  }, [isLoaded, navItems]);
 
   if (currentPath === '/dashboard' || currentPath === '/dashboard/') {
     return <Dashboard onBackHome={handleBackHome} />;
