@@ -1820,17 +1820,13 @@ const App = () => {
         </div>
 
         <div className={`lg:hidden absolute top-24 left-0 w-full bg-[#0A0A0A] border-b border-[#2A2A2A] flex flex-col p-8 gap-8 shadow-sm z-40 transition-all duration-500 ease-in-out ${isNavOpen ? 'opacity-100 translate-y-0' : 'opacity-0 -translate-y-4 pointer-events-none'}`}>
-          {navItems.map((item) => {
+          {navItems.filter(item => item.id !== 'bundel' && item.id !== 'doktrin').map((item) => {
             const isActive = item.id === activeSection;
             return (
               <button
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
-                className={`text-[11px] uppercase tracking-[0.2em] text-left transition-colors font-mono font-bold ${
-                  item.id === 'bundel'
-                    ? `text-[#D46B4A] border ${isActive ? 'border-[#D46B4A] bg-[#D46B4A]/10' : 'border-[#D46B4A]/40'} px-3 py-1 rounded w-fit hover:bg-[#D46B4A]/10 transition-all duration-300`
-                    : `${isActive ? 'text-[#D46B4A]' : 'text-[#737373]'} hover:text-[#D46B4A]`
-                }`}
+                className={`text-[11px] uppercase tracking-[0.2em] text-left transition-colors font-mono font-bold ${isActive ? 'text-[#D46B4A]' : 'text-[#737373]'} hover:text-[#D46B4A]`}
               >
                 {item.label}
               </button>
@@ -1840,19 +1836,21 @@ const App = () => {
       </nav>
 
       {/* MAIN CONTENT AREA */}
-      <main className="max-w-5xl mx-auto px-6 md:px-12 w-full flex-grow relative z-10 pt-24">
-        <Beranda isLoaded={isLoaded} t={t} />
-        <Marquee t={t} />
-        <Statistik t={t} />
-        <Layanan t={t} />
-        <KatalogBundel t={t} onSelectBundle={handleSelectBundle} />
-        <AboutUs t={t} />
-        <Partnership t={t} partnerships={partnerships} lang={lang} />
-        <OurWork t={t} publicWorks={publicWorks} lang={lang} onOpenCaseStudy={(work) => setActiveCaseStudy(work)} />
-        <OurTeam t={t} />
-        <Doktrin t={t} />
-        <FAQ t={t} />
-        <Kontak t={t} objective={objective} setObjective={setObjective} />
+      <main className="max-w-5xl mx-auto px-6 md:px-12 w-full flex-grow relative z-10 pt-24 flex flex-col">
+        <div className="order-1 lg:order-none"><Beranda isLoaded={isLoaded} t={t} /></div>
+        <div className="order-2 lg:order-none"><Marquee t={t} /></div>
+        <div className="order-3 lg:order-none"><Statistik t={t} /></div>
+        <div className="order-4 lg:order-none"><Layanan t={t} /></div>
+        {/* Hidden on mobile */}
+        <div className="hidden lg:block lg:order-none"><KatalogBundel t={t} onSelectBundle={handleSelectBundle} /></div>
+        <div className="order-5 lg:order-none"><Kontak t={t} objective={objective} setObjective={setObjective} /></div>
+        <div className="order-6 lg:order-none"><FAQ t={t} /></div>
+        <div className="order-7 lg:order-none"><AboutUs t={t} /></div>
+        {/* Hidden on mobile */}
+        <div className="hidden lg:block lg:order-none"><Doktrin t={t} /></div>
+        <div className="order-8 lg:order-none"><OurWork t={t} publicWorks={publicWorks} lang={lang} onOpenCaseStudy={(work) => setActiveCaseStudy(work)} /></div>
+        <div className="order-9 lg:order-none"><OurTeam t={t} /></div>
+        <div className="order-10 lg:order-none"><Partnership t={t} partnerships={partnerships} lang={lang} /></div>
       </main>
 
       {/* CASE STUDY DETAIL MODAL */}
