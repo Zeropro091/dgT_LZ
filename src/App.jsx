@@ -1275,6 +1275,7 @@ const KatalogBundel = ({ t, onSelectBundle }) => {
 // --- BAGIAN 5: KONTAK ---
 const Kontak = ({ t, objective, setObjective }) => {
   const [name, setName] = useState('');
+  const [channel, setChannel] = useState('whatsapp'); // 'whatsapp' | 'instagram'
 
   return (
     <section id="kontak" className="flex flex-col gap-16 pt-24 pb-24 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
@@ -1300,6 +1301,35 @@ const Kontak = ({ t, objective, setObjective }) => {
                 placeholder={t.kontak.p1} 
               />
             </div>
+            
+            <div className="flex flex-col gap-3">
+              <label className="text-[10px] text-[#A3A3A3] uppercase tracking-[0.2em] font-mono font-bold">{t.kontak.f2}</label>
+              <div className="flex gap-4 font-mono text-[10px] uppercase font-bold tracking-wider">
+                <button
+                  type="button"
+                  onClick={() => setChannel('whatsapp')}
+                  className={`flex-1 py-3 border text-center transition-all ${
+                    channel === 'whatsapp'
+                      ? 'border-[#D46B4A] bg-[#D46B4A]/10 text-[#FAFAFA]'
+                      : 'border-[#2A2A2A] text-[#737373] hover:text-[#FAFAFA]'
+                  }`}
+                >
+                  WhatsApp
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setChannel('instagram')}
+                  className={`flex-1 py-3 border text-center transition-all ${
+                    channel === 'instagram'
+                      ? 'border-[#D46B4A] bg-[#D46B4A]/10 text-[#FAFAFA]'
+                      : 'border-[#2A2A2A] text-[#737373] hover:text-[#FAFAFA]'
+                  }`}
+                >
+                  Instagram DM
+                </button>
+              </div>
+            </div>
+
             <div className="flex flex-col gap-3">
               <label className="text-[10px] text-[#A3A3A3] uppercase tracking-[0.2em] font-mono font-bold">{t.kontak.f3}</label>
               <textarea 
@@ -1321,8 +1351,19 @@ const Kontak = ({ t, objective, setObjective }) => {
                   ? `Halo DGT_LZ, saya ingin konsultasi gratis / Blueprint AI:\n\n*Nama:* ${name}\n*Objektif:* ${objective}`
                   : `Hello DGT_LZ, I would like to request a free consultation / AI Blueprint:\n\n*Name:* ${name}\n*Objective:* ${objective}`;
                 
-                const waUrl = `https://wa.me/6281237729115?text=${encodeURIComponent(baseText)}`;
-                window.open(waUrl, '_blank');
+                if (channel === 'whatsapp') {
+                  const waUrl = `https://wa.me/6281237729115?text=${encodeURIComponent(baseText)}`;
+                  window.open(waUrl, '_blank');
+                } else {
+                  navigator.clipboard.writeText(baseText).then(() => {
+                    alert(isIndo 
+                      ? 'Pesan konsultasi Anda telah disalin ke clipboard! Mengarahkan ke DM Instagram...' 
+                      : 'Your consultation message has been copied to clipboard! Redirecting to Instagram DM...');
+                    window.open('https://ig.me/m/dgt_lz', '_blank');
+                  }).catch(() => {
+                    window.open('https://ig.me/m/dgt_lz', '_blank');
+                  });
+                }
               }}
             >
               <span>{t.kontak.btn}</span>
