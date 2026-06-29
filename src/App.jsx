@@ -2,6 +2,17 @@ import React, { useEffect, useState, useRef, useLayoutEffect, useMemo } from 're
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
+import AdminPortal from './AdminPortal';
+import TeamPortal from './TeamPortal';
+import ClientPortal from './ClientPortal';
+import {
+  INITIAL_PROJECTS,
+  INITIAL_LEADS,
+  INITIAL_TASKS,
+  INITIAL_TRANSACTIONS,
+  INITIAL_TEAM,
+  INITIAL_TRANSPARENCY_LOG
+} from './sharedData.js';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -905,7 +916,7 @@ const AboutUs = ({ t }) => (
 );
 
 // --- BAGIAN 2.2: PARTNERSHIP ---
-const Partnership = ({ t }) => (
+const Partnership = ({ t, partnerships, lang }) => (
   <section id="partnership" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
     <AnimatedSection>
       <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
@@ -916,10 +927,14 @@ const Partnership = ({ t }) => (
       </p>
     </AnimatedSection>
     <AnimatedSection stagger={true} className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {t.partnership.items.map((item, idx) => (
-        <div key={idx} className="p-10 bg-[#111111]/30 backdrop-blur-sm border border-[#2A2A2A] hover:border-[#D46B4A] hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(212,107,74,0.06)] transition-all duration-500">
-          <h3 className="text-xl font-serif font-bold text-[#FAFAFA] mb-4">{item.title}</h3>
-          <p className="text-[#A3A3A3] font-light leading-relaxed">{item.desc}</p>
+      {partnerships.map((item, idx) => (
+        <div key={item.id || idx} className="p-10 bg-[#111111]/30 backdrop-blur-sm border border-[#2A2A2A] hover:border-[#D46B4A] hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(212,107,74,0.06)] transition-all duration-500">
+          <h3 className="text-xl font-serif font-bold text-[#FAFAFA] mb-4">
+            {lang === 'id' ? (item.title_id || item.title) : (item.title_en || item.title || item.title_id)}
+          </h3>
+          <p className="text-[#A3A3A3] font-light leading-relaxed">
+            {lang === 'id' ? (item.desc_id || item.desc) : (item.desc_en || item.desc || item.desc_id)}
+          </p>
         </div>
       ))}
     </AnimatedSection>
@@ -927,51 +942,98 @@ const Partnership = ({ t }) => (
 );
 
 // --- BAGIAN 2.3: OUR WORK ---
-const OurWork = ({ t }) => (
-  <section id="work" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
-    <AnimatedSection>
-      <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
-        {t.work.t1}<i className="text-[#D46B4A]">{t.work.t1_i}</i>
-      </h2>
-      <p className="max-w-2xl text-[#A3A3A3] font-light text-lg">
-        {t.work.d1}
-      </p>
-    </AnimatedSection>
-    <AnimatedSection stagger={true} className="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {t.work.items.map((item, idx) => (
-        <div key={idx} className="group flex flex-col gap-6 hover:-translate-y-2 transition-all duration-500">
-          <div className="aspect-video w-full bg-[#111111]/30 backdrop-blur-sm border border-[#2A2A2A] overflow-hidden relative group-hover:border-[#D46B4A] transition-all duration-500 flex items-center justify-center">
-            {item.image ? (
-              <img src={item.image} alt={item.title} className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 opacity-60 group-hover:opacity-85 group-hover:scale-105" />
-            ) : (
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-60"></div>
-            )}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-60 pointer-events-none"></div>
-            <div className="absolute bottom-4 left-4 flex gap-2 z-10">
-              {item.tags.map((tag, tidx) => (
-                <span key={tidx} className="text-[8px] font-mono font-bold uppercase tracking-widest px-2 py-1 bg-[#D46B4A] text-white rounded-sm">
-                  {tag}
-                </span>
-              ))}
-            </div>
+const OurWork = ({ t, publicWorks, lang, onOpenCaseStudy }) => {
+  const [activeFilter, setActiveFilter] = useState('all'); // 'all' | 'client' | 'concept'
+
+  const filteredWorks = activeFilter === 'all' 
+    ? publicWorks 
+    : publicWorks.filter(item => item.type === activeFilter);
+
+  return (
+    <section id="work" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
+      <AnimatedSection>
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-6">
+          <div>
+            <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+              {t.work.t1}<i className="text-[#D46B4A]">{t.work.t1_i}</i>
+            </h2>
+            <p className="max-w-2xl text-[#A3A3A3] font-light text-lg">
+              {t.work.d1}
+            </p>
           </div>
-          <div className="flex flex-col gap-2">
-            <h3 className="text-xl font-serif font-bold text-[#FAFAFA] group-hover:text-[#D46B4A] transition-colors">
-              {item.link ? (
-                <a href={item.link} target="_blank" rel="noreferrer" className="hover:underline inline-flex items-center gap-1.5">
-                  {item.title} <span className="text-xs text-[#D46B4A] font-sans">↗</span>
-                </a>
-              ) : (
-                item.title
-              )}
-            </h3>
-            <p className="text-[#737373] text-sm font-light leading-relaxed">{item.desc}</p>
+          
+          {/* Portfolio Filter Tabs */}
+          <div className="flex gap-2 bg-[#0a0a0a] p-1 border border-[#151515] rounded font-mono text-[8px] font-bold uppercase tracking-wider">
+            <button
+              onClick={() => setActiveFilter('all')}
+              className={`px-3 py-1.5 rounded transition-all duration-300 ${activeFilter === 'all' ? 'bg-[#D46B4A] text-white font-bold' : 'text-[#737373] hover:text-white font-bold'}`}
+            >
+              {lang === 'id' ? 'Semua' : 'All Works'}
+            </button>
+            <button
+              onClick={() => setActiveFilter('client')}
+              className={`px-3 py-1.5 rounded transition-all duration-300 ${activeFilter === 'client' ? 'bg-[#D46B4A] text-white font-bold' : 'text-[#737373] hover:text-white font-bold'}`}
+            >
+              {lang === 'id' ? 'Proyek Klien' : 'Client Projects'}
+            </button>
+            <button
+              onClick={() => setActiveFilter('concept')}
+              className={`px-3 py-1.5 rounded transition-all duration-300 ${activeFilter === 'concept' ? 'bg-[#D46B4A] text-white font-bold' : 'text-[#737373] hover:text-white font-bold'}`}
+            >
+              {lang === 'id' ? 'Konsep & Blueprint' : 'Concepts'}
+            </button>
           </div>
         </div>
-      ))}
-    </AnimatedSection>
-  </section>
-);
+      </AnimatedSection>
+
+      <AnimatedSection stagger={true} className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        {filteredWorks.map((item, idx) => (
+          <div key={item.id || idx} className="group flex flex-col gap-6 hover:-translate-y-2 transition-all duration-500">
+            <div className="aspect-video w-full bg-[#111111]/30 backdrop-blur-sm border border-[#2A2A2A] overflow-hidden relative group-hover:border-[#D46B4A] transition-all duration-500 flex items-center justify-center">
+              {item.image ? (
+                <img src={item.image} alt={item.title} className="object-cover w-full h-full grayscale group-hover:grayscale-0 transition-all duration-700 opacity-60 group-hover:opacity-85 group-hover:scale-105" />
+              ) : (
+                <div className="absolute inset-0 bg-[#111]/80 flex items-center justify-center text-[10px] font-mono text-[#D46B4A] tracking-widest uppercase">
+                  {item.title}
+                </div>
+              )}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] to-transparent opacity-60 pointer-events-none"></div>
+              
+              {/* Type Badge & Tags */}
+              <div className="absolute top-4 left-4 z-10">
+                <span className={`text-[7px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 border rounded-sm ${item.type === 'concept' ? 'bg-[#D46B4A]/10 border-[#D46B4A]/30 text-[#D46B4A]' : 'bg-green-500/10 border-green-500/30 text-green-400'}`}>
+                  {item.type === 'concept' ? (lang === 'id' ? 'Konsep' : 'Concept') : (lang === 'id' ? 'Proyek' : 'Active Project')}
+                </span>
+              </div>
+
+              <div className="absolute bottom-4 left-4 flex gap-2 z-10">
+                {(item.tags || []).map((tag, tidx) => (
+                  <span key={tidx} className="text-[8px] font-mono font-bold uppercase tracking-widest px-2 py-1 bg-[#111] border border-[#222] text-[#A3A3A3] rounded-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+            <div className="flex flex-col gap-2">
+              <h3 className="text-xl font-serif font-bold text-[#FAFAFA] group-hover:text-[#D46B4A] transition-colors">
+                {item.title}
+              </h3>
+              <p className="text-[#737373] text-sm font-light leading-relaxed">
+                {lang === 'id' ? (item.desc_id || item.desc) : (item.desc_en || item.desc || item.desc_id)}
+              </p>
+              <button
+                onClick={() => onOpenCaseStudy(item)}
+                className="text-[10px] font-mono font-bold text-[#D46B4A] uppercase tracking-widest hover:underline text-left mt-2 flex items-center gap-1.5"
+              >
+                {lang === 'id' ? 'Baca Case Study' : 'Read Case Study'} <span>→</span>
+              </button>
+            </div>
+          </div>
+        ))}
+      </AnimatedSection>
+    </section>
+  );
+};
 
 // --- BAGIAN 2.4: OUR TEAM ---
 const OurTeam = ({ t }) => (
@@ -1304,115 +1366,108 @@ const Kontak = ({ t, objective, setObjective }) => {
 };
 
 
-// --- DASHBOARD COMPONENT ---
-const Dashboard = ({ onBackHome }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [error, setError] = useState('');
-
-  const handleLogin = (e) => {
-    e.preventDefault();
-    if (username === 'admin' && password === '123123') {
-      setIsLoggedIn(true);
-      setError('');
-    } else {
-      setError('Kredensial tidak valid / Invalid credentials');
-    }
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-    setUsername('');
-    setPassword('');
-    onBackHome();
-  };
-
-  if (isLoggedIn) {
-    return (
-      <div className="min-h-screen bg-[#0A0A0A] flex flex-col justify-between p-6 relative font-sans">
-        <div className="absolute top-6 right-6 z-50">
-          <button 
-            onClick={handleLogout}
-            className="border border-[#D46B4A]/40 hover:border-[#D46B4A] hover:bg-[#D46B4A]/10 text-[#D46B4A] px-4 py-2 font-mono text-xs font-bold uppercase tracking-wider transition-all duration-300 rounded"
-          >
-            Logout
-          </button>
-        </div>
-        
-        <div className="flex-grow flex items-center justify-center">
-          <h1 className="text-3xl md:text-5xl font-mono text-[#FAFAFA] tracking-widest uppercase">
-            dashboard lol
-          </h1>
-        </div>
-        
-        <div className="w-full flex justify-between items-center text-[10px] text-[#737373] font-mono uppercase tracking-[0.2em] border-t border-[#151515] pt-4">
-          <span>DGT_LZ // SECURE CORE</span>
-          <span>ADMIN SESSION ACTIVE</span>
-        </div>
-      </div>
-    );
-  }
-
-  return (
-    <div className="min-h-screen bg-[#0A0A0A] flex items-center justify-center p-6 relative font-sans">
-      <button 
-        onClick={onBackHome}
-        className="absolute top-6 left-6 text-[#737373] hover:text-[#FAFAFA] font-mono text-xs uppercase tracking-widest transition-colors flex items-center gap-2"
-      >
-        ← Home
-      </button>
-
-      <div className="w-full max-w-sm border border-[#151515] bg-[#050505] p-8 flex flex-col gap-6 rounded shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
-        <div className="flex flex-col gap-1 border-b border-[#151515] pb-4">
-          <span className="text-[10px] font-mono text-[#D46B4A] uppercase tracking-widest font-bold">SYSTEM ACCESS</span>
-          <h2 className="text-xl font-clash font-extrabold text-[#FAFAFA]">DGT_LZ Dashboard</h2>
-        </div>
-
-        <form onSubmit={handleLogin} className="flex flex-col gap-4">
-          <div className="flex flex-col gap-2">
-            <label className="text-[9px] text-[#737373] font-mono uppercase tracking-wider font-bold">Username</label>
-            <input 
-              type="text" 
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="Username" 
-              className="bg-[#0A0A0A] border border-[#151515] focus:border-[#D46B4A] outline-none py-2 px-3 text-[#FAFAFA] text-xs font-mono transition-all duration-300 placeholder:text-[#737373]/50" 
-              required
-            />
-          </div>
-
-          <div className="flex flex-col gap-2">
-            <label className="text-[9px] text-[#737373] font-mono uppercase tracking-wider font-bold">Password</label>
-            <input 
-              type="password" 
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="Password" 
-              className="bg-[#0A0A0A] border border-[#151515] focus:border-[#D46B4A] outline-none py-2 px-3 text-[#FAFAFA] text-xs font-mono transition-all duration-300 placeholder:text-[#737373]/50" 
-              required
-            />
-          </div>
-
-          {error && (
-            <span className="text-[10px] text-red-500 font-mono tracking-wide">{error}</span>
-          )}
-
-          <button 
-            type="submit" 
-            className="w-full py-3 bg-[#D46B4A] hover:bg-[#c25a3a] text-white font-mono text-xs font-bold uppercase tracking-widest transition-all duration-300 rounded mt-2"
-          >
-            Access Dashboard
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-};
-
 // --- KOMPONEN UTAMA (APP) ---
 const App = () => {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
+  
+  // Shared Operational States across Portals
+  const [projects, setProjects] = useState(INITIAL_PROJECTS);
+  const [tasks, setTasks] = useState(INITIAL_TASKS);
+  const [leads, setLeads] = useState(INITIAL_LEADS);
+  const [transactions, setTransactions] = useState(INITIAL_TRANSACTIONS);
+  const [team, setTeam] = useState(INITIAL_TEAM);
+  const [transparencyLog, setTransparencyLog] = useState(INITIAL_TRANSPARENCY_LOG);
+
+  // Dynamic Portfolio & Partnerships for Public Page
+  const [publicWorks, setPublicWorks] = useState([
+    { 
+      id: 'work-1',
+      title: 'Lensa Insignia', 
+      type: 'client',
+      tags: ['AI', 'Web Media'], 
+      desc_id: 'Media berita dengan desain profesional & dashboard management otonom. Dilengkapi Post Creator berita-ke-sosmed 5-klik (<10 detik) dan AI pencari fakta otomatis.',
+      desc_en: 'News media with professional design & autonomous management dashboard. Features a 5-click news-to-social post creator (<10s) and fact-checking AI team.',
+      link: 'https://lensainsignia.com',
+      image: '/lensa_insignia.jpg',
+      problem_id: 'Optimasi SEO maksimal (indeksasi bot lambat pada SPA biasa), ancaman mismatch hidrasi SSR React, dan penegakan hak akses edit artikel yang aman bagi ratusan penulis independen.',
+      problem_en: 'Achieving perfect SEO indexing (SPA clients are crawled slowly), resolving React SSR hydration mismatches, and securing dynamic database tables across multiple independent authors.',
+      solution_id: 'Express.js SSR Engine dengan routing dinamis React Helmet, validasi window/document DOM aman, dan penulisan PostgreSQL RLS Policies menggunakan auth.uid() pada Supabase.',
+      solution_en: 'Engineered an Express.js SSR Engine with React Helmet tag injection, browser API execution guards (SSR safe), and enterprise Postgres Row Level Security (RLS) policies linking author_id.',
+      result_id: 'Skor Lighthouse SEO 100/100, waktu respon server awal di bawah 120ms, First Contentful Paint di bawah 0.8 detik, serta perlindungan database 100% aman terenkripsi.',
+      result_en: 'Attained Lighthouse SEO score of 100/100, initial server response under 120ms, First Contentful Paint (FCP) under 0.8s, and 100% database write/read compliance.'
+    },
+    { 
+      id: 'work-2',
+      title: 'Command', 
+      type: 'client',
+      tags: ['SaaS', 'Agency OS'], 
+      desc_id: 'Sistem operasi otonom agensi kreatif & developer. Menyatukan manajemen proyek, CRM pipeline, keuangan ledger, dan analitik kapasitas tim dalam dasbor real-time bertenaga AI.',
+      desc_en: 'An autonomous operating system for creative & developer agencies. Unifies project tracking, CRM pipeline, global ledger, and team analytics in a real-time, AI-powered environment.',
+      image: '/command_logo.jpg',
+      problem_id: 'Tim agensi kehilangan sinkronisasi internal, pencatatan transaksi manual yang rawan human-error, serta kesulitan memperkirakan kapasitas utilisasi pekerja.',
+      problem_en: 'Agency teams lacked project alignment, relying on manual error-prone financial ledgers, with zero visibility into team capacity metrics.',
+      solution_id: 'Pemasangan operating system khusus agensi dengan modul CRM dinamis, general ledger keuangan, dan visualisasi status kapasitas tim berbasis status waktu riil.',
+      solution_en: 'Deployed a custom Agency OS uniting CRM pipelines, a financial ledger, and real-time visual tracking of team capacity metrics.',
+      result_id: 'Tingkat kesalahan laporan keuangan berkurang hingga 0% (zero leak) dan efisiensi alokasi pengerjaan proyek meningkat sebesar 90%.',
+      result_en: 'Eliminated accounting leaks (0% ledger errors) and optimized developer allocation capacity by over 90% across the board.'
+    },
+    { 
+      id: 'work-3',
+      title: 'Sapa Warga', 
+      type: 'client',
+      tags: ['AI', 'GovTech', 'Firebase'], 
+      desc_id: 'Infrastruktur digital aspirasi & keluhan rakyat berbasis AI Google Gemini. Menghilangkan pendaftaran berbelit dengan sidik jari perangkat, serta mengotomatisasi pemilahan aduan.',
+      desc_en: 'An AI-first public complaint infrastructure powered by Google Gemini. Removes complex sign-ups using device fingerprinting, and automates triage and classification.',
+      image: '/sapawarga_logo.jpg',
+      problem_id: 'Birokrasi pelayanan publik lambat, penumpukan berkas laporan manual, hambatan login pendaftaran konvensional, serta nol transparansi penanganan aduan warga.',
+      problem_en: 'Slow manual bureaucracy triage backlogs, complex registration/login barriers for citizens, and zero status transparency on complaint handling.',
+      solution_id: 'Integrasi asinkron model Gemini 2.5 Flash untuk ekstraksi JSON kategori & prioritas aduan, database real-time Firebase Firestore, dan chatbox admin-pelapor aman.',
+      solution_en: 'Deployed Google Gemini 2.5 Flash structural JSON extraction for real-time priority sorting, combined with a Firebase Firestore chatbox securing citizen anonymity.',
+      result_id: 'Pemilahan laporan instan (<5 detik), memotong latency respons aduan dari harian ke hitungan jam, transparansi publik 100%, dan keamanan akses Firestore Rules.',
+      result_en: 'Delivered instant report categorizations (<5s), cut complaint latency to hours, ensured 100% public accountability, and secured chat channels via Firestore Rules.'
+    },
+    { 
+      id: 'work-4',
+      title: 'Restaurant Operations', 
+      type: 'concept',
+      tags: ['AI', 'SaaS', 'Blueprint'], 
+      desc_id: 'Konsep Restaurant Operating System terintegrasi yang menyatukan pesanan pelanggan QR, alur kerja dapur, inventaris bahan baku real-time, dan analitik cabang.',
+      desc_en: 'A unified Restaurant Operating System architecture connecting customer QR ordering, live kitchen flow, real-time stock ingredients, and multi-branch analytics.',
+      problem_id: 'Operasional restoran terfragmentasi menggunakan banyak aplikasi terpisah (POS, WhatsApp, Excel) yang memicu inefisiensi, salah saji stok, dan antrean aduan pelanggan.',
+      problem_en: 'Disconnected tools (POS, WhatsApp, spreadsheets) create manual reconciliations, kitchen priority confusion, raw ingredient stockouts, and poor multi-branch performance visibility.',
+      solution_id: 'Membangun blueprint arsitektur Restaurant OS terpusat yang menghubungkan dasbor Owner, Manager, Kitchen queue, Waiter notifications, QR Customer portal, dan Finance ledger.',
+      solution_en: 'Engineered a centralized restaurant operating ecosystem connecting Owner KPIs, Manager shift workflows, Live Kitchen queues, Waiter serving alarms, QR digital menus, and SQL Ledger accounting.',
+      result_id: 'Memangkas pekerjaan administrasi manual, mengotomatisasi pembaruan stok bahan baku, melacak sisa limbah makanan, dan mempercepat respons reservasi pelanggan.',
+      result_en: 'Eliminated manual accounting reconciliations, automated raw ingredient alerts, optimized chef cooking speed, and delivered real-time executive summaries.'
+    }
+  ]);
+
+  const [activeCaseStudy, setActiveCaseStudy] = useState(null);
+
+  const [partnerships, setPartnerships] = useState([
+    { 
+      id: 'part-1',
+      title_id: 'Aliansi Teknologi', 
+      title_en: 'Technology Alliance',
+      desc_id: 'Berkolaborasi dengan penyedia infrastruktur untuk integrasi deep-tech.',
+      desc_en: 'Collaborate with infrastructure providers for deep-tech integration.'
+    },
+    { 
+      id: 'part-2',
+      title_id: 'Partner Strategis', 
+      title_en: 'Strategic Partners',
+      desc_id: 'Menghubungkan inovasi Bali dengan jaringan bisnis global.',
+      desc_en: 'Connecting Balinese innovation with global business networks.'
+    },
+    { 
+      id: 'part-3',
+      title_id: 'Inkubator Startup', 
+      title_en: 'Startup Incubator',
+      desc_id: 'Memberdayakan pendiri baru dengan infrastruktur AI otonom.',
+      desc_en: 'Empowering new founders with autonomous AI infrastructure.'
+    }
+  ]);
+
   const [isLoaded, setIsLoaded] = useState(false);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [showNav, setShowNav] = useState(true);
@@ -1543,8 +1598,73 @@ const App = () => {
     return () => observer.disconnect();
   }, [isLoaded, navItems]);
 
+  if (currentPath === '/admin' || currentPath === '/admin/') {
+    return (
+      <AdminPortal
+        projects={projects}
+        setProjects={setProjects}
+        leads={leads}
+        setLeads={setLeads}
+        transactions={transactions}
+        setTransactions={setTransactions}
+        team={team}
+        setTeam={setTeam}
+        transparencyLog={transparencyLog}
+        setTransparencyLog={setTransparencyLog}
+        onBackHome={handleBackHome}
+        publicWorks={publicWorks}
+        setPublicWorks={setPublicWorks}
+        partnerships={partnerships}
+        setPartnerships={setPartnerships}
+      />
+    );
+  }
+
+  if (currentPath === '/team' || currentPath === '/team/') {
+    return (
+      <TeamPortal
+        tasks={tasks}
+        setTasks={setTasks}
+        projects={projects}
+        leads={leads}
+        onBackHome={handleBackHome}
+      />
+    );
+  }
+
+  if (currentPath === '/client' || currentPath === '/client/') {
+    return (
+      <ClientPortal
+        projects={projects}
+        setProjects={setProjects}
+        transparencyLog={transparencyLog}
+        setTransparencyLog={setTransparencyLog}
+        onBackHome={handleBackHome}
+      />
+    );
+  }
+
   if (currentPath === '/dashboard' || currentPath === '/dashboard/') {
-    return <Dashboard onBackHome={handleBackHome} />;
+    window.history.replaceState({}, '', '/admin');
+    return (
+      <AdminPortal
+        projects={projects}
+        setProjects={setProjects}
+        leads={leads}
+        setLeads={setLeads}
+        transactions={transactions}
+        setTransactions={setTransactions}
+        team={team}
+        setTeam={setTeam}
+        transparencyLog={transparencyLog}
+        setTransparencyLog={setTransparencyLog}
+        onBackHome={handleBackHome}
+        publicWorks={publicWorks}
+        setPublicWorks={setPublicWorks}
+        partnerships={partnerships}
+        setPartnerships={setPartnerships}
+      />
+    );
   }
 
   return (
@@ -1555,6 +1675,10 @@ const App = () => {
         @import url('https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap');
         @import url('https://api.fontshare.com/v2/css?f[]=clash-display@400,500,600,700&f[]=cabinet-grotesk@300,400,500,700&display=swap');
 
+        html, body {
+          max-width: 100%;
+          overflow-x: hidden;
+        }
         html { scroll-behavior: auto; } /* Lenis handles smooth */
         body {
           font-family: 'Cabinet Grotesk', sans-serif;
@@ -1723,13 +1847,72 @@ const App = () => {
         <Layanan t={t} />
         <KatalogBundel t={t} onSelectBundle={handleSelectBundle} />
         <AboutUs t={t} />
-        <Partnership t={t} />
-        <OurWork t={t} />
+        <Partnership t={t} partnerships={partnerships} lang={lang} />
+        <OurWork t={t} publicWorks={publicWorks} lang={lang} onOpenCaseStudy={(work) => setActiveCaseStudy(work)} />
         <OurTeam t={t} />
         <Doktrin t={t} />
         <FAQ t={t} />
         <Kontak t={t} objective={objective} setObjective={setObjective} />
       </main>
+
+      {/* CASE STUDY DETAIL MODAL */}
+      {activeCaseStudy && (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center p-6 bg-black/90 backdrop-blur-md">
+          <div className="w-full max-w-2xl border border-[#151515] bg-[#070707] p-8 flex flex-col gap-6 rounded relative max-h-[85vh] overflow-y-auto custom-scrollbar animate-fade-in">
+            <button
+              onClick={() => setActiveCaseStudy(null)}
+              className="absolute top-6 right-6 text-[#737373] hover:text-white font-mono text-xs uppercase tracking-widest transition-colors"
+            >
+              ✕ Close
+            </button>
+
+            <div>
+              <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">
+                Case Study // DGT_LZ Impact
+              </span>
+              <h3 className="text-3xl font-serif font-bold text-white mt-1">
+                {activeCaseStudy.title}
+              </h3>
+              <div className="flex gap-2 mt-3">
+                {(activeCaseStudy.tags || []).map((tag, i) => (
+                  <span key={i} className="text-[8px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 bg-[#D46B4A]/10 border border-[#D46B4A]/30 text-[#D46B4A] rounded-sm">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-6 border-t border-[#151515] pt-6 text-[11px] font-mono">
+              <div className="flex flex-col gap-2">
+                <span className="text-[#737373] uppercase font-bold tracking-wider">▪ THE PROBLEM</span>
+                <p className="text-[#A3A3A3] leading-relaxed pl-3 border-l border-[#151515]">
+                  {lang === 'id' 
+                    ? (activeCaseStudy.problem_id || 'Klien mengalami hambatan operasional karena proses manual yang tidak efisien.') 
+                    : (activeCaseStudy.problem_en || 'Client faced operational bottlenecks due to heavy manual processing dependencies.')}
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-2">
+                <span className="text-[#D46B4A] uppercase font-bold tracking-wider">▪ THE SOLUTION</span>
+                <p className="text-[#FAFAFA] leading-relaxed pl-3 border-l border-[#D46B4A]/40">
+                  {lang === 'id' 
+                    ? (activeCaseStudy.solution_id || 'Kami mengintegrasikan agen AI otonom untuk menangani alur kerja secara instan.') 
+                    : (activeCaseStudy.solution_en || 'We deployed custom autonomous AI agents to automate the pipeline end-to-end.')}
+                </p>
+              </div>
+
+              <div className="flex flex-col gap-2 bg-[#0C0C0C] border border-[#151515] p-4 rounded">
+                <span className="text-green-400 uppercase font-bold tracking-wider">▪ THE IMPACT & ROI</span>
+                <p className="text-[#FAFAFA] leading-relaxed mt-1">
+                  {lang === 'id' 
+                    ? (activeCaseStudy.result_id || 'Penghematan waktu hingga 95% dan peningkatan kapasitas skala bisnis 10x lipat.') 
+                    : (activeCaseStudy.result_en || 'Achieved 95% operational time reduction and 10x capacity scaling without hiring additions.')}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* GLOBAL FOOTER */}
       <footer className="border-t border-[#2A2A2A] mt-auto bg-[#0A0A0A] relative z-10">
