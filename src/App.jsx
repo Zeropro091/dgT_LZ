@@ -182,6 +182,30 @@ const contentLocales = {
           },
           portfolio: 'https://rifky.media',
           ig: '@rifky_media'
+        },
+        {
+          name: 'Bayu',
+          role: 'Head Social Media & Marketing',
+          bio: 'Spesialis pertumbuhan organik dan arsitek kampanye pemasaran digital terukur.',
+          experience: {
+            role: 'Growth Marketer',
+            work: 'Mengoptimalkan akuisisi klien DGT melalui corong pemasaran otomatis.',
+            achievements: 'Meningkatkan ROI pemasaran sebesar 350% dalam satu kuartal.'
+          },
+          portfolio: 'https://bayu.growth',
+          ig: '@bayu_marketing'
+        },
+        {
+          name: 'Rama',
+          role: 'Head Robotic',
+          bio: 'Insinyur robotik yang mengintegrasikan agen AI otonom dengan aktuator fisik.',
+          experience: {
+            role: 'Robotics System Engineer',
+            work: 'Merancang lengan robotik otonom dan sistem otomasi lini perakitan.',
+            achievements: 'Mendeploy 15+ sistem robotik otonom di manufaktur lokal.'
+          },
+          portfolio: 'https://rama.robotics',
+          ig: '@rama_robotics'
         }
       ]
     },
@@ -514,6 +538,30 @@ const contentLocales = {
           },
           portfolio: 'https://rifky.media',
           ig: '@rifky_media'
+        },
+        {
+          name: 'Bayu',
+          role: 'Head Social Media & Marketing',
+          bio: 'Organic growth specialist and architect of measurable digital marketing campaigns.',
+          experience: {
+            role: 'Growth Marketer',
+            work: 'Optimizing DGT\'s client acquisition funnel through automated marketing systems.',
+            achievements: 'Boosted marketing ROI by 350% within a single quarter.'
+          },
+          portfolio: 'https://bayu.growth',
+          ig: '@bayu_marketing'
+        },
+        {
+          name: 'Rama',
+          role: 'Head Robotic',
+          bio: 'Robotics engineer integrating autonomous AI agents with physical actuators.',
+          experience: {
+            role: 'Robotics System Engineer',
+            work: 'Designing autonomous robotic arms and assembly line automation systems.',
+            achievements: 'Deployed 15+ autonomous robotic systems in local manufacturing.'
+          },
+          portfolio: 'https://rama.robotics',
+          ig: '@rama_robotics'
         }
       ]
     },
