@@ -125,39 +125,63 @@ const contentLocales = {
         },
         {
           name: 'Made',
-          role: '3D Fabrication Specialist',
-          bio: 'Pakar transformasi dari dunia digital ke fisik melalui rekayasa presisi.',
+          role: 'Head Server Division',
+          bio: 'Mengarsiteki server backend berkinerja tinggi dan arsitektur database terdistribusi.',
           experience: {
-            role: 'Lead 3D Engineer',
-            work: 'Merancang dan mencetak prototipe medis tingkat tinggi.',
-            achievements: 'Menerima Excellence Award pada Bali Tech Expo 2024.'
+            role: 'Lead Systems Engineer',
+            work: 'Mengelola infrastruktur cloud multi-region untuk sistem otonom DGT.',
+            achievements: 'Menjamin uptime sistem 99.99% di bawah beban puncak.'
           },
-          portfolio: 'https://made.design',
-          ig: '@made_3d'
+          portfolio: 'https://made.server',
+          ig: '@made_server'
         },
         {
-          name: 'Dwi',
-          role: 'UI/UX Strategist',
-          bio: 'Merancang pengalaman digital dengan fokus pada konversi tinggi dan estetika fungsional.',
+          name: 'Panji',
+          role: 'Head 3D Division',
+          bio: 'Spesialis rekayasa fisik dan cetak 3D dengan akurasi mikron.',
           experience: {
-            role: 'Senior Product Designer',
-            work: 'Membangun ekosistem e-commerce untuk brand global.',
-            achievements: 'Pemenang Redot Design Award 2025.'
+            role: 'Lead 3D Fabrication Engineer',
+            work: 'Merancang suku cadang presisi tinggi dan prototipe arsitektur kompleks.',
+            achievements: 'Menerima Penghargaan Inovasi Manufaktur Bali 2025.'
           },
-          portfolio: 'https://dwi.ui',
-          ig: '@dwi_ux'
+          portfolio: 'https://panji.3d',
+          ig: '@panji_3d'
         },
         {
           name: 'Ganesh',
-          role: 'Full-Stack Developer',
-          bio: 'Menjembatani kesenjangan antara estetika front-end dan logika back-end yang kompleks.',
+          role: 'Designer',
+          bio: 'Menciptakan identitas visual futuristik dan antarmuka pengguna yang memikat.',
           experience: {
-            role: 'Senior Software Engineer',
-            work: 'Arsitektur SaaS yang skalabel dan integrasi LLM kustom.',
-            achievements: 'Kontributor utama pada beberapa pustaka open-source AI populer.'
+            role: 'Lead Visual Designer',
+            work: 'Merancang bahasa desain Neo-Brutalis dan skema interaksi 3D DGT.',
+            achievements: 'Memenangkan Digital Design Award untuk antarmuka portal otonom.'
           },
-          portfolio: 'https://ganesh.code',
-          ig: '@ganesh_dev'
+          portfolio: 'https://ganesh.design',
+          ig: '@ganesh_design'
+        },
+        {
+          name: 'Aan',
+          role: 'Full Stack',
+          bio: 'Menyatukan logika backend yang andal dengan antarmuka frontend yang responsif.',
+          experience: {
+            role: 'Senior Full Stack Developer',
+            work: 'Membangun dasbor operasional otonom dan integrasi API DGT.',
+            achievements: 'Mengurangi latensi sinkronisasi data antar portal hingga 40%.'
+          },
+          portfolio: 'https://aan.dev',
+          ig: '@aan_dev'
+        },
+        {
+          name: 'Rifky',
+          role: 'Media & Branding',
+          bio: 'Menyampaikan visi teknologi DGT ke dunia luar melalui narasi media yang kuat.',
+          experience: {
+            role: 'Brand Architect',
+            work: 'Memimpin strategi media sosial, kampanye visual, dan dokumentasi operasional.',
+            achievements: 'Meningkatkan jangkauan organik brand DGT hingga 300% dalam 6 bulan.'
+          },
+          portfolio: 'https://rifky.media',
+          ig: '@rifky_media'
         }
       ]
     },
@@ -433,39 +457,63 @@ const contentLocales = {
         },
         {
           name: 'Made',
-          role: '3D Fabrication Specialist',
-          bio: 'Expert in transforming the digital world to physical through precision engineering.',
+          role: 'Head Server Division',
+          bio: 'Architecting high-performance backend servers and distributed database structures.',
           experience: {
-            role: 'Lead 3D Engineer',
-            work: 'Designed and printed high-end medical prototypes.',
-            achievements: 'Received Excellence Award at Bali Tech Expo 2024.'
+            role: 'Lead Systems Engineer',
+            work: 'Managing multi-region cloud infrastructures for DGT\'s autonomous systems.',
+            achievements: 'Guarantees 99.99% system uptime under peak traffic load.'
           },
-          portfolio: 'https://made.design',
-          ig: '@made_3d'
+          portfolio: 'https://made.server',
+          ig: '@made_server'
         },
         {
-          name: 'Dwi',
-          role: 'UI/UX Strategist',
-          bio: 'Designing digital experiences with a focus on high conversion and functional aesthetics.',
+          name: 'Panji',
+          role: 'Head 3D Division',
+          bio: 'Specialist in physical engineering and 3D fabrication with micron accuracy.',
           experience: {
-            role: 'Senior Product Designer',
-            work: 'Built e-commerce ecosystems for global brands.',
-            achievements: 'Winner of Redot Design Award 2025.'
+            role: 'Lead 3D Fabrication Engineer',
+            work: 'Designing high-precision parts and complex architectural prototypes.',
+            achievements: 'Received the Bali Manufacturing Innovation Award 2025.'
           },
-          portfolio: 'https://dwi.ui',
-          ig: '@dwi_ux'
+          portfolio: 'https://panji.3d',
+          ig: '@panji_3d'
         },
         {
           name: 'Ganesh',
-          role: 'Full-Stack Developer',
-          bio: 'Bridging the gap between front-end aesthetics and complex back-end logic.',
+          role: 'Designer',
+          bio: 'Creating futuristic visual identities and highly immersive user interfaces.',
           experience: {
-            role: 'Senior Software Engineer',
-            work: 'Scalable SaaS architecture and custom LLM integrations.',
-            achievements: 'Key contributor to several popular AI open-source libraries.'
+            role: 'Lead Visual Designer',
+            work: 'Designing DGT\'s Neo-Brutalist design language and 3D interaction schemes.',
+            achievements: 'Won the Digital Design Award for autonomous portal interfaces.'
           },
-          portfolio: 'https://ganesh.code',
-          ig: '@ganesh_dev'
+          portfolio: 'https://ganesh.design',
+          ig: '@ganesh_design'
+        },
+        {
+          name: 'Aan',
+          role: 'Full Stack',
+          bio: 'Unifying bulletproof backend logic with highly responsive frontend interfaces.',
+          experience: {
+            role: 'Senior Full Stack Developer',
+            work: 'Building DGT\'s autonomous operational dashboards and API integrations.',
+            achievements: 'Reduced data synchronization latency between portals by 40%.'
+          },
+          portfolio: 'https://aan.dev',
+          ig: '@aan_dev'
+        },
+        {
+          name: 'Rifky',
+          role: 'Media & Branding',
+          bio: 'Communicating DGT\'s technological vision to the world through strong media narratives.',
+          experience: {
+            role: 'Brand Architect',
+            work: 'Leading social media strategy, visual campaigns, and operational documentations.',
+            achievements: 'Boosted DGT organic brand reach by 300% within 6 months.'
+          },
+          portfolio: 'https://rifky.media',
+          ig: '@rifky_media'
         }
       ]
     },
