@@ -1086,12 +1086,20 @@ const OurWork = ({ t, publicWorks, lang, onOpenCaseStudy }) => {
 // --- BAGIAN 2.4: OUR TEAM ---
 const OurTeam = ({ t }) => {
   const [wheelIndex, setWheelIndex] = useState(0);
+  const [dragAngle, setDragAngle] = useState(null);
   const wheelRef = useRef(null);
   const isScrolling = useRef(false);
+  const startY = useRef(0);
+  const startAngle = useRef(0);
+  const isDragging = useRef(false);
+  const hasDragged = useRef(false);
 
   const members = t.team.members;
   const total = members.length;
-  const activeIdx = ((wheelIndex % total) + total) % total;
+
+  const currentAngle = dragAngle !== null ? dragAngle : -wheelIndex * (360 / total);
+  const virtualWheelIndex = -currentAngle / (360 / total);
+  const activeIdx = ((Math.round(virtualWheelIndex) % total) + total) % total;
   const activeMember = members[activeIdx];
 
   useEffect(() => {
@@ -1118,18 +1126,69 @@ const OurTeam = ({ t }) => {
     return () => el.removeEventListener('wheel', handleWheel);
   }, [total]);
 
+  const handleStart = (clientY) => {
+    isDragging.current = true;
+    hasDragged.current = false;
+    startY.current = clientY;
+    startAngle.current = dragAngle !== null ? dragAngle : -wheelIndex * (360 / total);
+    setDragAngle(startAngle.current);
+  };
+
+  useEffect(() => {
+    if (dragAngle === null) return;
+
+    const handleWindowMouseMove = (e) => {
+      if (!isDragging.current) return;
+      const deltaY = e.clientY - startY.current;
+      if (Math.abs(deltaY) > 5) {
+        hasDragged.current = true;
+      }
+      const angle = startAngle.current + deltaY * 0.4;
+      setDragAngle(angle);
+    };
+
+    const handleWindowTouchMove = (e) => {
+      if (!isDragging.current || !e.touches[0]) return;
+      const deltaY = e.touches[0].clientY - startY.current;
+      if (Math.abs(deltaY) > 5) {
+        hasDragged.current = true;
+      }
+      const angle = startAngle.current + deltaY * 0.4;
+      setDragAngle(angle);
+    };
+
+    const handleWindowEnd = () => {
+      if (!isDragging.current) return;
+      isDragging.current = false;
+      const finalAngle = dragAngle;
+      const closestIndex = Math.round(-finalAngle / (360 / total));
+      setWheelIndex(closestIndex);
+      setDragAngle(null);
+    };
+
+    window.addEventListener('mousemove', handleWindowMouseMove);
+    window.addEventListener('mouseup', handleWindowEnd);
+    window.addEventListener('touchmove', handleWindowTouchMove, { passive: false });
+    window.addEventListener('touchend', handleWindowEnd);
+
+    return () => {
+      window.removeEventListener('mousemove', handleWindowMouseMove);
+      window.removeEventListener('mouseup', handleWindowEnd);
+      window.removeEventListener('touchmove', handleWindowTouchMove);
+      window.removeEventListener('touchend', handleWindowEnd);
+    };
+  }, [dragAngle, total]);
+
   const handleCardClick = (idx) => {
+    if (hasDragged.current) return;
     const currentActive = ((wheelIndex % total) + total) % total;
     let diff = idx - currentActive;
     
-    // Find shortest rotation path
     if (diff > total / 2) diff -= total;
     if (diff < -total / 2) diff += total;
     
     setWheelIndex((prev) => prev + diff);
   };
-
-  const wheelRotationAngle = -wheelIndex * (360 / total);
 
   return (
     <section id="team" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
@@ -1188,7 +1247,11 @@ const OurTeam = ({ t }) => {
         </div>
 
         {/* Right Side: Circular Orbiting Wheel */}
-        <div className="w-1/2 flex items-center justify-center h-[520px] relative overflow-hidden select-none">
+        <div 
+          className="w-1/2 flex items-center justify-center h-[520px] relative overflow-hidden select-none"
+          onMouseDown={(e) => handleStart(e.clientY)}
+          onTouchStart={(e) => handleStart(e.touches[0].clientY)}
+        >
           {/* Circular Orbit Track */}
           <div 
             className="absolute rounded-full border border-dashed border-[#2A2A2A]/60 bg-black/10 pointer-events-none"
@@ -1215,7 +1278,7 @@ const OurTeam = ({ t }) => {
 
           {/* Mouse Wheel Scroll Indicator */}
           <div className="absolute top-4 right-12 z-30 flex flex-col items-center gap-1.5 animate-pulse pointer-events-none opacity-40">
-            <div className="text-[8px] font-mono text-[#737373] uppercase tracking-[0.3em]">Wheel Scroll</div>
+            <div className="text-[8px] font-mono text-[#737373] uppercase tracking-[0.3em]">Drag or Scroll</div>
             <svg width="10" height="16" viewBox="0 0 12 20" fill="none">
               <rect x="1" y="1" width="10" height="18" rx="5" stroke="#737373" strokeWidth="1.5"/>
               <circle cx="6" cy="6" r="1.5" fill="#D46B4A">
@@ -1233,8 +1296,8 @@ const OurTeam = ({ t }) => {
               top: '250px',
               width: '0px',
               height: '0px',
-              transform: `rotate(${wheelRotationAngle}deg)`,
-              transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+              transform: `rotate(${currentAngle}deg)`,
+              transition: dragAngle !== null ? 'none' : 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
               transformStyle: 'preserve-3d',
             }}
           >
@@ -1242,14 +1305,14 @@ const OurTeam = ({ t }) => {
               const isActive = idx === activeIdx;
               const cardFixedAngle = idx * (360 / total) + 180;
               
-              const diff = idx - activeIdx;
+              const diff = idx - virtualWheelIndex;
               let shortestDiff = diff;
               if (shortestDiff > total / 2) shortestDiff -= total;
               if (shortestDiff < -total / 2) shortestDiff += total;
               const absDiff = Math.abs(shortestDiff);
 
-              const scale = isActive ? 1.05 : 0.85;
-              const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.6 : 0.2;
+              const scale = 1.05 - Math.min(absDiff, 1.5) * 0.15;
+              const opacity = Math.max(0.2, 1 - Math.min(absDiff, 1.5) * 0.5);
               const zIndex = 10 - Math.round(absDiff * 2);
 
               return (
@@ -1262,7 +1325,7 @@ const OurTeam = ({ t }) => {
                     transform: `translate(-50%, -50%) rotate(${cardFixedAngle}deg) translate(200px) rotate(-180deg) scale(${scale})`,
                     opacity,
                     zIndex,
-                    transition: 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                    transition: dragAngle !== null ? 'opacity 0.1s ease, transform 0.1s ease' : 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                     cursor: 'pointer',
                   }}
                   className={`flex items-center gap-4 p-4 rounded-xl border backdrop-blur-md transition-all duration-500 group select-none ${
