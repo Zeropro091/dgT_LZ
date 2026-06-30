@@ -1374,7 +1374,7 @@ const OurTeam = ({ t }) => {
 
           {/* Central Logo Hub Frame */}
           <div 
-            className="absolute rounded-full border border-[#2A2A2A] bg-[#1A1A1A] shadow-[0_0_50px_rgba(212,107,74,0.15)] flex items-center justify-center overflow-hidden z-10"
+            className="absolute rounded-full border border-[#2A2A2A] bg-[#0A0A0A]/85 backdrop-blur-md shadow-[0_0_50px_rgba(212,107,74,0.15)] flex items-center justify-center overflow-hidden z-10"
             style={{
               width: '200px',
               height: '200px',
@@ -1386,7 +1386,7 @@ const OurTeam = ({ t }) => {
             <img 
               src="/dgt_lz_logo.svg" 
               alt="DGT_LZ Logo" 
-              className="w-28 h-28 object-contain" 
+              className="w-28 h-28 object-cover rounded-full border border-[#2A2A2A] overflow-hidden shadow-md" 
             />
           </div>
 
