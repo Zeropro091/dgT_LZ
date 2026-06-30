@@ -1348,12 +1348,12 @@ const OurTeam = ({ t }) => {
           onMouseDown={(e) => handleStart(e.clientY)}
           onTouchStart={(e) => handleStart(e.touches[0].clientY)}
         >
-          {/* Solid Semi-Circular Orbit Track Plate */}
+          {/* Solid Terracotta Orbit Track Plate */}
           <div 
-            className="absolute rounded-full border border-[#2A2A2A]/80 bg-[#111111]/40 backdrop-blur-sm pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.6)]"
+            className="absolute rounded-full bg-[#D46B4A] pointer-events-none shadow-[0_0_40px_rgba(212,107,74,0.15)]"
             style={{
-              width: '400px',
-              height: '400px',
+              width: '360px',
+              height: '360px',
               left: '340px',
               top: '250px',
               transform: 'translate(-50%, -50%)',
@@ -1361,7 +1361,7 @@ const OurTeam = ({ t }) => {
           />
           {/* Dashed circular orbit track line */}
           <div 
-            className="absolute rounded-full border border-dashed border-[#D46B4A]/15 pointer-events-none"
+            className="absolute rounded-full border border-dashed border-[#D46B4A]/30 pointer-events-none"
             style={{
               width: '400px',
               height: '400px',
