@@ -1372,6 +1372,24 @@ const OurTeam = ({ t }) => {
             }}
           />
 
+          {/* Central Logo Hub Frame */}
+          <div 
+            className="absolute rounded-full border border-[#2A2A2A] bg-[#0A0A0A] shadow-[0_0_30px_rgba(212,107,74,0.15)] flex items-center justify-center overflow-hidden z-10"
+            style={{
+              width: '90px',
+              height: '90px',
+              left: '340px',
+              top: '250px',
+              transform: 'translate(-50%, -50%)',
+            }}
+          >
+            <img 
+              src="/dgt_lz_logo.svg" 
+              alt="DGT_LZ Logo" 
+              className="w-full h-full object-cover scale-[1.05]" 
+            />
+          </div>
+
           {/* Mouse Wheel Scroll Indicator */}
           <div className="absolute top-4 right-12 z-30 flex flex-col items-center gap-1.5 animate-pulse pointer-events-none opacity-40">
             <div className="text-[8px] font-mono text-[#737373] uppercase tracking-[0.3em]">Drag or Scroll</div>
