@@ -1383,11 +1383,26 @@ const OurTeam = ({ t }) => {
               transform: 'translate(-50%, -50%)',
             }}
           >
-            <img 
-              src="/dgt_lz_logo.svg" 
-              alt="DGT_LZ Logo" 
-              className="w-28 h-28 object-cover rounded-full border border-[#2A2A2A] overflow-hidden shadow-md" 
-            />
+            {/* Inline SVG to prevent browser dark-mode extension image-inversion filters */}
+            <svg 
+              viewBox="0 0 512 512" 
+              fill="none" 
+              className="w-28 h-28 rounded-full border border-[#2A2A2A] overflow-hidden bg-[#1A1A1A] shadow-md"
+            >
+              <rect width="512" height="512" fill="#1A1A1A"/>
+              <g stroke="#FDFBF7" strokeWidth="1" opacity="0.05">
+                <line x1="128" y1="0" x2="128" y2="512" />
+                <line x1="256" y1="0" x2="256" y2="512" />
+                <line x1="384" y1="0" x2="384" y2="512" />
+                <line x1="0" y1="128" x2="512" y2="128" />
+                <line x1="0" y1="256" x2="512" y2="256" />
+                <line x1="0" y1="384" x2="512" y2="384" />
+              </g>
+              <path d="M128 128 H256 A128 128 0 0 1 256 384 H128 Z" fill="#FDFBF7"/>
+              <path d="M192 192 H256 A64 64 0 0 1 256 320 H192 Z" fill="#1A1A1A"/>
+              <rect x="192" y="320" width="192" height="64" fill="#D46B4A"/>
+              <circle cx="384" cy="384" r="32" fill="#D46B4A"/>
+            </svg>
           </div>
 
           {/* Mouse Wheel Scroll Indicator */}
