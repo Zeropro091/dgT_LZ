@@ -1348,9 +1348,9 @@ const OurTeam = ({ t }) => {
           onMouseDown={(e) => handleStart(e.clientY)}
           onTouchStart={(e) => handleStart(e.touches[0].clientY)}
         >
-          {/* Circular Orbit Track */}
+          {/* Solid Semi-Circular Orbit Track Plate */}
           <div 
-            className="absolute rounded-full border border-dashed border-[#2A2A2A]/60 bg-black/10 pointer-events-none"
+            className="absolute rounded-full border border-[#2A2A2A]/80 bg-[#111111]/40 backdrop-blur-sm pointer-events-none shadow-[inset_0_0_40px_rgba(0,0,0,0.6)]"
             style={{
               width: '400px',
               height: '400px',
@@ -1359,51 +1359,17 @@ const OurTeam = ({ t }) => {
               transform: 'translate(-50%, -50%)',
             }}
           />
-
-          {/* Core Hub Glow */}
+          {/* Dashed circular orbit track line */}
           <div 
-            className="absolute rounded-full bg-[#D46B4A]/5 blur-[60px] pointer-events-none"
+            className="absolute rounded-full border border-dashed border-[#D46B4A]/15 pointer-events-none"
             style={{
-              width: '280px',
-              height: '280px',
+              width: '400px',
+              height: '400px',
               left: '340px',
               top: '250px',
               transform: 'translate(-50%, -50%)',
             }}
           />
-
-          {/* Central Logo Hub Frame */}
-          <div 
-            className="absolute rounded-full border border-[#2A2A2A] bg-[#0A0A0A]/85 backdrop-blur-md shadow-[0_0_50px_rgba(212,107,74,0.15)] flex items-center justify-center overflow-hidden z-30"
-            style={{
-              width: '200px',
-              height: '200px',
-              left: '340px',
-              top: '250px',
-              transform: 'translate(-50%, -50%)',
-            }}
-          >
-            {/* Inline SVG to prevent browser dark-mode extension image-inversion filters */}
-            <svg 
-              viewBox="0 0 512 512" 
-              fill="none" 
-              className="w-28 h-28 rounded-full border border-[#2A2A2A] overflow-hidden bg-[#1A1A1A] shadow-md"
-            >
-              <rect width="512" height="512" fill="#1A1A1A"/>
-              <g stroke="#FDFBF7" strokeWidth="1" opacity="0.05">
-                <line x1="128" y1="0" x2="128" y2="512" />
-                <line x1="256" y1="0" x2="256" y2="512" />
-                <line x1="384" y1="0" x2="384" y2="512" />
-                <line x1="0" y1="128" x2="512" y2="128" />
-                <line x1="0" y1="256" x2="512" y2="256" />
-                <line x1="0" y1="384" x2="512" y2="384" />
-              </g>
-              <path d="M128 128 H256 A128 128 0 0 1 256 384 H128 Z" fill="#FDFBF7"/>
-              <path d="M192 192 H256 A64 64 0 0 1 256 320 H192 Z" fill="#1A1A1A"/>
-              <rect x="192" y="320" width="192" height="64" fill="#D46B4A"/>
-              <circle cx="384" cy="384" r="32" fill="#D46B4A"/>
-            </svg>
-          </div>
 
           {/* Mouse Wheel Scroll Indicator */}
           <div className="absolute top-4 right-12 z-30 flex flex-col items-center gap-1.5 animate-pulse pointer-events-none opacity-40">
