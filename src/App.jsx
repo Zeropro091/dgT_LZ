@@ -1150,6 +1150,36 @@ const OurTeam = ({ t }) => {
   const activeIdx = ((Math.round(virtualWheelIndex) % total) + total) % total;
   const activeMember = members[activeIdx];
 
+  const playClick = () => {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(1200, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.04);
+      
+      gainNode.gain.setValueAtTime(0.04, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.04);
+      
+      osc.start(audioCtx.currentTime);
+      osc.stop(audioCtx.currentTime + 0.04);
+    } catch (e) {}
+  };
+
+  const isFirstMount = useRef(true);
+  useEffect(() => {
+    if (isFirstMount.current) {
+      isFirstMount.current = false;
+      return;
+    }
+    playClick();
+  }, [activeIdx]);
+
   useEffect(() => {
     const el = wheelRef.current;
     if (!el) return;
@@ -1287,9 +1317,27 @@ const OurTeam = ({ t }) => {
               </div>
             </div>
 
-            <div className="mt-4 flex gap-6 pt-4 border-t border-[#2A2A2A]/40">
-              <a href={activeMember?.portfolio} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#D46B4A] uppercase tracking-widest hover:underline">Portfolio ↗</a>
-              <a href={`https://instagram.com/${activeMember?.ig.replace('@', '')}`} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#737373] uppercase tracking-widest hover:text-[#FAFAFA] transition-colors">Instagram</a>
+            <div className="mt-4 flex justify-between items-center pt-4 border-t border-[#2A2A2A]/40">
+              <div className="flex gap-6">
+                <a href={activeMember?.portfolio} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#D46B4A] uppercase tracking-widest hover:underline">Portfolio ↗</a>
+                <a href={`https://instagram.com/${activeMember?.ig.replace('@', '')}`} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#737373] uppercase tracking-widest hover:text-[#FAFAFA] transition-colors">Instagram</a>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setWheelIndex(prev => prev - 1)}
+                  className="w-6 h-6 rounded border border-[#2A2A2A] hover:border-[#D46B4A] text-[#737373] hover:text-[#FAFAFA] flex items-center justify-center transition-all font-mono text-[9px] select-none bg-transparent active:scale-90"
+                  title="Prev Member"
+                >
+                  ◀
+                </button>
+                <button
+                  onClick={() => setWheelIndex(prev => prev + 1)}
+                  className="w-6 h-6 rounded border border-[#2A2A2A] hover:border-[#D46B4A] text-[#737373] hover:text-[#FAFAFA] flex items-center justify-center transition-all font-mono text-[9px] select-none bg-transparent active:scale-90"
+                  title="Next Member"
+                >
+                  ▶
+                </button>
+              </div>
             </div>
           </div>
         </div>
