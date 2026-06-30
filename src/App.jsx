@@ -1037,12 +1037,13 @@ const OurWork = ({ t, publicWorks, lang, onOpenCaseStudy }) => {
 
 // --- BAGIAN 2.4: OUR TEAM ---
 const OurTeam = ({ t }) => {
-  const [activeIdx, setActiveIdx] = useState(0);
+  const [wheelIndex, setWheelIndex] = useState(0);
   const wheelRef = useRef(null);
   const isScrolling = useRef(false);
 
   const members = t.team.members;
   const total = members.length;
+  const activeIdx = ((wheelIndex % total) + total) % total;
   const activeMember = members[activeIdx];
 
   useEffect(() => {
@@ -1055,9 +1056,9 @@ const OurTeam = ({ t }) => {
       isScrolling.current = true;
 
       if (e.deltaY > 0) {
-        setActiveIdx((prev) => (prev + 1) % total);
+        setWheelIndex((prev) => prev + 1);
       } else {
-        setActiveIdx((prev) => (prev - 1 + total) % total);
+        setWheelIndex((prev) => prev - 1);
       }
 
       setTimeout(() => {
@@ -1069,35 +1070,18 @@ const OurTeam = ({ t }) => {
     return () => el.removeEventListener('wheel', handleWheel);
   }, [total]);
 
-  const getCardStyle = (idx) => {
-    let diff = idx - activeIdx;
+  const handleCardClick = (idx) => {
+    const currentActive = ((wheelIndex % total) + total) % total;
+    let diff = idx - currentActive;
     
+    // Find shortest rotation path
     if (diff > total / 2) diff -= total;
     if (diff < -total / 2) diff += total;
-
-    const angle = 180 + diff * (360 / total);
-    const absDiff = Math.abs(diff);
-
-    const r = 200; 
-    const dx = r * Math.cos((angle * Math.PI) / 180);
-    const dy = r * Math.sin((angle * Math.PI) / 180);
-
-    const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.6 : 0.2;
-    const scale = absDiff === 0 ? 1.05 : 0.85;
-    const zIndex = 10 - Math.round(absDiff * 2);
-
-    return {
-      position: 'absolute',
-      left: '340px', 
-      top: '250px',  
-      width: '240px',
-      transform: `translate(-50%, -50%) translate3d(${dx}px, ${dy}px, 0) rotate(${angle - 180}deg) scale(${scale})`,
-      opacity,
-      zIndex,
-      transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
-      cursor: 'pointer',
-    };
+    
+    setWheelIndex((prev) => prev + diff);
   };
+
+  const wheelRotationAngle = -wheelIndex * (360 / total);
 
   return (
     <section id="team" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
@@ -1192,15 +1176,47 @@ const OurTeam = ({ t }) => {
             </svg>
           </div>
 
-          {/* Wheel Cards */}
-          <div ref={wheelRef} className="absolute inset-0 cursor-ns-resize z-20">
+          {/* Rotating Wheel Container */}
+          <div 
+            ref={wheelRef} 
+            className="absolute cursor-ns-resize z-20"
+            style={{
+              left: '340px',
+              top: '250px',
+              width: '0px',
+              height: '0px',
+              transform: `rotate(${wheelRotationAngle}deg)`,
+              transition: 'transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+              transformStyle: 'preserve-3d',
+            }}
+          >
             {members.map((member, idx) => {
               const isActive = idx === activeIdx;
+              const cardFixedAngle = idx * (360 / total) + 180;
+              
+              const diff = idx - activeIdx;
+              let shortestDiff = diff;
+              if (shortestDiff > total / 2) shortestDiff -= total;
+              if (shortestDiff < -total / 2) shortestDiff += total;
+              const absDiff = Math.abs(shortestDiff);
+
+              const scale = isActive ? 1.05 : 0.85;
+              const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.6 : 0.2;
+              const zIndex = 10 - Math.round(absDiff * 2);
+
               return (
                 <div
                   key={idx}
-                  style={getCardStyle(idx)}
-                  onClick={() => setActiveIdx(idx)}
+                  onClick={() => handleCardClick(idx)}
+                  style={{
+                    position: 'absolute',
+                    width: '240px',
+                    transform: `translate(-50%, -50%) rotate(${cardFixedAngle}deg) translate(200px) rotate(-180deg) scale(${scale})`,
+                    opacity,
+                    zIndex,
+                    transition: 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+                    cursor: 'pointer',
+                  }}
                   className={`flex items-center gap-4 p-4 rounded-xl border backdrop-blur-md transition-all duration-500 group select-none ${
                     isActive
                       ? 'bg-[#D46B4A]/10 border-[#D46B4A] shadow-[0_4px_24px_rgba(212,107,74,0.15)]'
