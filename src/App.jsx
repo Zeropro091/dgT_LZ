@@ -1036,56 +1036,251 @@ const OurWork = ({ t, publicWorks, lang, onOpenCaseStudy }) => {
 };
 
 // --- BAGIAN 2.4: OUR TEAM ---
-const OurTeam = ({ t }) => (
-  <section id="team" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
-    <AnimatedSection>
-      <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
-        {t.team.t1}<i className="text-[#D46B4A]">{t.team.t1_i}</i>
-      </h2>
-      <p className="max-w-2xl text-[#A3A3A3] font-light text-lg">
-        {t.team.d1}
-      </p>
-    </AnimatedSection>
-    <AnimatedSection stagger={true} className="grid grid-cols-1 md:grid-cols-2 gap-12">
-      {t.team.members.map((member, idx) => (
-        <div key={idx} className="flex flex-col md:flex-row gap-8 p-8 bg-[#111111]/30 backdrop-blur-sm border border-[#2A2A2A] hover:border-[#D46B4A] hover:shadow-[0_12px_40px_rgba(212,107,74,0.06)] hover:-translate-y-1.5 transition-all duration-500 group">
-          <div className="w-full md:w-40 shrink-0">
-            <div className="aspect-square w-full bg-[#111111] border border-[#2A2A2A] relative grayscale group-hover:grayscale-0 transition-all duration-700 flex items-center justify-center overflow-hidden">
-               <span className="text-[#2A2A2A] font-maroni text-4xl">{member.name[0]}</span>
+const OurTeam = ({ t }) => {
+  const [activeIdx, setActiveIdx] = useState(0);
+  const wheelRef = useRef(null);
+  const isScrolling = useRef(false);
+
+  const members = t.team.members;
+  const total = members.length;
+  const activeMember = members[activeIdx];
+
+  useEffect(() => {
+    const el = wheelRef.current;
+    if (!el) return;
+
+    const handleWheel = (e) => {
+      e.preventDefault();
+      if (isScrolling.current) return;
+      isScrolling.current = true;
+
+      if (e.deltaY > 0) {
+        setActiveIdx((prev) => (prev + 1) % total);
+      } else {
+        setActiveIdx((prev) => (prev - 1 + total) % total);
+      }
+
+      setTimeout(() => {
+        isScrolling.current = false;
+      }, 500);
+    };
+
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, [total]);
+
+  const getCardStyle = (idx) => {
+    let diff = idx - activeIdx;
+    
+    if (diff > total / 2) diff -= total;
+    if (diff < -total / 2) diff += total;
+
+    const angle = 180 + diff * (360 / total);
+    const absDiff = Math.abs(diff);
+
+    const r = 200; 
+    const dx = r * Math.cos((angle * Math.PI) / 180);
+    const dy = r * Math.sin((angle * Math.PI) / 180);
+
+    const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.6 : 0.2;
+    const scale = absDiff === 0 ? 1.05 : 0.85;
+    const zIndex = 10 - Math.round(absDiff * 2);
+
+    return {
+      position: 'absolute',
+      left: '340px', 
+      top: '250px',  
+      width: '240px',
+      transform: `translate(-50%, -50%) translate3d(${dx}px, ${dy}px, 0) rotate(${angle - 180}deg) scale(${scale})`,
+      opacity,
+      zIndex,
+      transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+      cursor: 'pointer',
+    };
+  };
+
+  return (
+    <section id="team" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
+      <AnimatedSection>
+        <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
+          {t.team.t1}<i className="text-[#D46B4A]">{t.team.t1_i}</i>
+        </h2>
+        <p className="max-w-2xl text-[#A3A3A3] font-light text-lg">
+          {t.team.d1}
+        </p>
+      </AnimatedSection>
+
+      {/* Desktop Wheel UI */}
+      <div className="hidden lg:flex gap-12 items-center">
+        {/* Left Side: Detailed Dossier Panel */}
+        <div className="w-1/2 flex flex-col gap-6 min-h-[480px] relative justify-center">
+          <div key={activeIdx} className="flex flex-col gap-6 p-10 bg-[#111111]/30 backdrop-blur-sm border border-[#2A2A2A]/60 rounded-xl relative overflow-hidden animate-fade-in shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+            <div className="absolute top-0 left-0 w-1.5 h-full bg-[#D46B4A]" />
+            
+            <div className="flex gap-6 items-center">
+              <div className="w-20 h-20 bg-[#111111] border border-[#2A2A2A] relative flex items-center justify-center overflow-hidden rounded-xl shrink-0 shadow-inner">
+                <span className="text-[#D46B4A] font-maroni text-5xl font-bold select-none">{activeMember?.name[0]}</span>
+              </div>
+              <div>
+                <h3 className="text-3xl font-clash font-bold text-[#FAFAFA] mb-1">{activeMember?.name}</h3>
+                <div className="text-xs font-mono text-[#D46B4A] uppercase tracking-[0.2em] font-bold">{activeMember?.role}</div>
+              </div>
             </div>
-            <div className="mt-4 flex flex-col gap-2">
-              <a href={member.portfolio} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#D46B4A] uppercase tracking-widest hover:underline">Portfolio</a>
-              <a href={`https://instagram.com/${member.ig.replace('@', '')}`} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#737373] uppercase tracking-widest hover:text-[#FAFAFA]">Instagram</a>
-            </div>
-          </div>
-          <div className="flex flex-col gap-6">
-            <div>
-              <h3 className="text-2xl font-clash font-bold text-[#FAFAFA] mb-1">{member.name}</h3>
-              <div className="text-xs font-mono text-[#D46B4A] uppercase tracking-[0.2em] font-bold">{member.role}</div>
-            </div>
-            <p className="text-[#A3A3A3] text-sm font-light leading-relaxed">
-              {member.bio}
+
+            <p className="text-[#A3A3A3] text-base font-light leading-relaxed min-h-[4.5rem]">
+              {activeMember?.bio}
             </p>
+
             <div className="pt-6 border-t border-[#2A2A2A] flex flex-col gap-4">
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] font-mono text-[#737373] uppercase tracking-widest font-bold">Experience</span>
-                <span className="text-sm text-[#FAFAFA] font-clash">{member.experience.role}</span>
+              <div className="grid grid-cols-2 gap-6">
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] font-mono text-[#737373] uppercase tracking-widest font-bold">Experience</span>
+                  <span className="text-sm text-[#FAFAFA] font-clash leading-snug">{activeMember?.experience.role}</span>
+                </div>
+                <div className="flex flex-col gap-1">
+                  <span className="text-[10px] font-mono text-[#737373] uppercase tracking-widest font-bold">Key Work</span>
+                  <span className="text-sm text-[#A3A3A3] font-light leading-snug">{activeMember?.experience.work}</span>
+                </div>
               </div>
-              <div className="flex flex-col gap-1">
-                <span className="text-[10px] font-mono text-[#737373] uppercase tracking-widest font-bold">Key Work</span>
-                <span className="text-sm text-[#A3A3A3] font-light">{member.experience.work}</span>
-              </div>
-              <div className="flex flex-col gap-1">
+              <div className="flex flex-col gap-1 pt-2">
                 <span className="text-[10px] font-mono text-[#737373] uppercase tracking-widest font-bold">Achievements</span>
-                <span className="text-sm text-[#D46B4A] italic font-light">{member.experience.achievements}</span>
+                <span className="text-sm text-[#D46B4A] italic font-light">{activeMember?.experience.achievements}</span>
               </div>
+            </div>
+
+            <div className="mt-4 flex gap-6 pt-4 border-t border-[#2A2A2A]/40">
+              <a href={activeMember?.portfolio} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#D46B4A] uppercase tracking-widest hover:underline">Portfolio ↗</a>
+              <a href={`https://instagram.com/${activeMember?.ig.replace('@', '')}`} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#737373] uppercase tracking-widest hover:text-[#FAFAFA] transition-colors">Instagram</a>
             </div>
           </div>
         </div>
-      ))}
-    </AnimatedSection>
-  </section>
-);
+
+        {/* Right Side: Circular Orbiting Wheel */}
+        <div className="w-1/2 flex items-center justify-center h-[520px] relative overflow-hidden select-none">
+          {/* Circular Orbit Track */}
+          <div 
+            className="absolute rounded-full border border-dashed border-[#2A2A2A]/60 bg-black/10 pointer-events-none"
+            style={{
+              width: '400px',
+              height: '400px',
+              left: '340px',
+              top: '250px',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+
+          {/* Core Hub Glow */}
+          <div 
+            className="absolute rounded-full bg-[#D46B4A]/5 blur-[60px] pointer-events-none"
+            style={{
+              width: '280px',
+              height: '280px',
+              left: '340px',
+              top: '250px',
+              transform: 'translate(-50%, -50%)',
+            }}
+          />
+
+          {/* Mouse Wheel Scroll Indicator */}
+          <div className="absolute top-4 right-12 z-30 flex flex-col items-center gap-1.5 animate-pulse pointer-events-none opacity-40">
+            <div className="text-[8px] font-mono text-[#737373] uppercase tracking-[0.3em]">Wheel Scroll</div>
+            <svg width="10" height="16" viewBox="0 0 12 20" fill="none">
+              <rect x="1" y="1" width="10" height="18" rx="5" stroke="#737373" strokeWidth="1.5"/>
+              <circle cx="6" cy="6" r="1.5" fill="#D46B4A">
+                <animate attributeName="cy" values="6;14;6" dur="2s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+
+          {/* Wheel Cards */}
+          <div ref={wheelRef} className="absolute inset-0 cursor-ns-resize z-20">
+            {members.map((member, idx) => {
+              const isActive = idx === activeIdx;
+              return (
+                <div
+                  key={idx}
+                  style={getCardStyle(idx)}
+                  onClick={() => setActiveIdx(idx)}
+                  className={`flex items-center gap-4 p-4 rounded-xl border backdrop-blur-md transition-all duration-500 group select-none ${
+                    isActive
+                      ? 'bg-[#D46B4A]/10 border-[#D46B4A] shadow-[0_4px_24px_rgba(212,107,74,0.15)]'
+                      : 'bg-[#111111]/80 border-[#2A2A2A]/80 hover:border-[#D46B4A]/50 hover:bg-[#111111]/90'
+                  }`}
+                >
+                  <div className={`w-9 h-9 rounded-full flex items-center justify-center font-maroni text-base font-bold transition-all shrink-0 ${
+                    isActive ? 'bg-[#D46B4A] text-white' : 'bg-[#2A2A2A] text-[#FAFAFA]'
+                  }`}>
+                    {member.name[0]}
+                  </div>
+                  <div className="flex flex-col min-w-0">
+                    <span className="text-sm font-clash font-bold text-[#FAFAFA] truncate group-hover:text-[#D46B4A] transition-colors">{member.name}</span>
+                    <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider truncate">{member.role}</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Orbit Navigation Indicator Ring */}
+          <div 
+            className="absolute rounded-full border-2 border-[#D46B4A] pointer-events-none z-10"
+            style={{
+              width: '24px',
+              height: '24px',
+              left: '140px', 
+              top: '250px',
+              transform: 'translate(-50%, -50%)',
+              boxShadow: '0 0 12px rgba(212, 107, 74, 0.4)',
+            }}
+          />
+        </div>
+      </div>
+
+      {/* Mobile/Tablet Fallback UI */}
+      <div className="flex lg:hidden flex-col gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {members.map((member, idx) => (
+            <div key={idx} className="flex flex-col gap-6 p-8 bg-[#111111]/30 backdrop-blur-sm border border-[#2A2A2A] rounded-xl hover:border-[#D46B4A] transition-all duration-500">
+              <div className="flex gap-4 items-center">
+                <div className="w-14 h-14 bg-[#111111] border border-[#2A2A2A] flex items-center justify-center rounded-xl shrink-0">
+                  <span className="text-[#D46B4A] font-maroni text-3xl font-bold">{member.name[0]}</span>
+                </div>
+                <div>
+                  <h3 className="text-xl font-clash font-bold text-[#FAFAFA] mb-1">{member.name}</h3>
+                  <div className="text-[10px] font-mono text-[#D46B4A] uppercase tracking-[0.15em] font-bold">{member.role}</div>
+                </div>
+              </div>
+              
+              <p className="text-[#A3A3A3] text-sm font-light leading-relaxed">
+                {member.bio}
+              </p>
+
+              <div className="pt-4 border-t border-[#2A2A2A]/40 flex flex-col gap-3">
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider font-bold">Experience</span>
+                  <span className="text-xs text-[#FAFAFA] font-clash">{member.experience.role}</span>
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider font-bold">Key Work</span>
+                  <span className="text-xs text-[#A3A3A3] font-light">{member.experience.work}</span>
+                </div>
+                <div className="flex flex-col gap-0.5">
+                  <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider font-bold">Achievements</span>
+                  <span className="text-xs text-[#D46B4A] italic font-light">{member.experience.achievements}</span>
+                </div>
+              </div>
+
+              <div className="pt-4 border-t border-[#2A2A2A]/40 flex gap-4">
+                <a href={member.portfolio} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#D46B4A] uppercase tracking-widest hover:underline">Portfolio ↗</a>
+                <a href={`https://instagram.com/${member.ig.replace('@', '')}`} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#737373] uppercase tracking-widest hover:text-[#FAFAFA] transition-colors">Instagram</a>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 // --- BAGIAN 3: DOKTRIN ---
 const Doktrin = ({ t }) => (
