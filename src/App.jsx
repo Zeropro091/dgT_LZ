@@ -1322,20 +1322,20 @@ const OurTeam = ({ t }) => {
                 <a href={activeMember?.portfolio} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#D46B4A] uppercase tracking-widest hover:underline">Portfolio ↗</a>
                 <a href={`https://instagram.com/${activeMember?.ig.replace('@', '')}`} target="_blank" rel="noreferrer" className="text-[10px] font-mono font-bold text-[#737373] uppercase tracking-widest hover:text-[#FAFAFA] transition-colors">Instagram</a>
               </div>
-              <div className="flex gap-2">
+              <div className="flex flex-col gap-1">
                 <button
                   onClick={() => setWheelIndex(prev => prev - 1)}
-                  className="w-6 h-6 rounded border border-[#2A2A2A] hover:border-[#D46B4A] text-[#737373] hover:text-[#FAFAFA] flex items-center justify-center transition-all font-mono text-[9px] select-none bg-transparent active:scale-90"
-                  title="Prev Member"
+                  className="w-5 h-5 rounded border border-[#2A2A2A] hover:border-[#D46B4A] text-[#737373] hover:text-[#FAFAFA] flex items-center justify-center transition-all font-mono text-[8px] select-none bg-transparent active:scale-90"
+                  title="Rotate Up"
                 >
-                  ◀
+                  ▲
                 </button>
                 <button
                   onClick={() => setWheelIndex(prev => prev + 1)}
-                  className="w-6 h-6 rounded border border-[#2A2A2A] hover:border-[#D46B4A] text-[#737373] hover:text-[#FAFAFA] flex items-center justify-center transition-all font-mono text-[9px] select-none bg-transparent active:scale-90"
-                  title="Next Member"
+                  className="w-5 h-5 rounded border border-[#2A2A2A] hover:border-[#D46B4A] text-[#737373] hover:text-[#FAFAFA] flex items-center justify-center transition-all font-mono text-[8px] select-none bg-transparent active:scale-90"
+                  title="Rotate Down"
                 >
-                  ▶
+                  ▼
                 </button>
               </div>
             </div>
