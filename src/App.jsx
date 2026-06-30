@@ -1374,7 +1374,7 @@ const OurTeam = ({ t }) => {
 
           {/* Central Logo Hub Frame */}
           <div 
-            className="absolute rounded-full border border-[#2A2A2A] bg-[#0A0A0A]/85 backdrop-blur-md shadow-[0_0_50px_rgba(212,107,74,0.15)] flex items-center justify-center overflow-hidden z-10"
+            className="absolute rounded-full border border-[#2A2A2A] bg-[#0A0A0A]/85 backdrop-blur-md shadow-[0_0_50px_rgba(212,107,74,0.15)] flex items-center justify-center overflow-hidden z-30"
             style={{
               width: '200px',
               height: '200px',
@@ -1441,8 +1441,9 @@ const OurTeam = ({ t }) => {
               const absDiff = Math.abs(shortestDiff);
 
               const scale = 1.05 - Math.min(absDiff, 1.5) * 0.15;
-              const opacity = Math.max(0.2, 1 - Math.min(absDiff, 1.5) * 0.5);
+              const opacity = absDiff === 0 ? 1 : absDiff === 1 ? 0.6 : 0;
               const zIndex = 10 - Math.round(absDiff * 2);
+              const pointerEvents = absDiff <= 1 ? 'auto' : 'none';
 
               return (
                 <div
@@ -1454,6 +1455,7 @@ const OurTeam = ({ t }) => {
                     transform: `translate(-50%, -50%) rotate(${cardFixedAngle}deg) translate(200px) rotate(-180deg) scale(${scale})`,
                     opacity,
                     zIndex,
+                    pointerEvents,
                     transition: dragAngle !== null ? 'opacity 0.1s ease, transform 0.1s ease' : 'opacity 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
                     cursor: 'pointer',
                   }}
