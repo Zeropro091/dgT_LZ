@@ -118,7 +118,7 @@ const ClientPortal = ({
         <div className="w-full max-w-sm border border-[#151515] bg-[#070707] p-6 flex flex-col gap-5 rounded shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
           <div>
             <span className="text-[9px] font-mono text-[#D46B4A] uppercase tracking-widest font-bold block">CLIENT GATEWAY</span>
-            <h4 className="text-xl font-serif text-[#FAFAFA] mt-1">Access Project Portal</h4>
+            <h4 className="text-xl font-clash text-[#FAFAFA] mt-1">Access Project Portal</h4>
           </div>
 
           <form onSubmit={handleClientRegister} className="flex flex-col gap-4 font-mono text-[10px]">
@@ -157,7 +157,7 @@ const ClientPortal = ({
       {/* Header */}
       <header className="border-b border-[#151515] flex items-center justify-between px-4 sm:px-8 h-[80px] shrink-0 z-20 bg-[#0D0D0D]">
         <div className="flex items-center gap-2 sm:gap-4">
-          <h1 className="font-serif text-2xl sm:text-[38px] leading-none tracking-[-1px] italic font-normal m-0 p-0 text-[#FAFAFA] hover:text-[#D46B4A] transition-colors cursor-pointer select-none">
+          <h1 className="font-maroni text-2xl sm:text-[38px] leading-none tracking-[-1px] m-0 p-0 text-[#FAFAFA] hover:text-[#D46B4A] transition-colors cursor-pointer select-none">
             Agency OS.
           </h1>
           <span className="text-[8px] font-mono text-[#D46B4A] border border-[#D46B4A]/20 px-2 py-0.5 rounded bg-[#D46B4A]/5 uppercase tracking-widest font-bold">V2.0</span>
@@ -192,8 +192,8 @@ const ClientPortal = ({
                   onClick={() => setActiveSubTab(item.id)}
                   className={`flex flex-row lg:flex-col items-baseline lg:items-start text-left group border-b lg:border-b border-transparent lg:border-[#151515] pb-1 lg:pb-3 shrink-0 gap-2 lg:gap-0 ${isActive ? 'opacity-100 border-[#D46B4A]' : 'opacity-40 hover:opacity-100'} transition-all`}
                 >
-                  <span className="font-serif italic text-[10px] lg:text-xs opacity-50 block text-[#D46B4A]">{item.number}</span>
-                  <span className={`font-serif text-sm lg:text-[22px] leading-tight whitespace-nowrap lg:whitespace-normal ${isActive ? 'text-[#D46B4A]' : 'text-[#FAFAFA]'}`}>
+                  <span className="font-mono italic text-[10px] lg:text-xs opacity-50 block text-[#D46B4A]">{item.number}</span>
+                  <span className={`font-clash text-sm lg:text-[22px] leading-tight whitespace-nowrap lg:whitespace-normal ${isActive ? 'text-[#D46B4A]' : 'text-[#FAFAFA]'}`}>
                     {item.label}
                   </span>
                 </button>
@@ -220,7 +220,7 @@ const ClientPortal = ({
                 <div className="flex justify-between items-center border-b border-[#151515] pb-4">
                   <div>
                     <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">CLIENT // PROGRESS</span>
-                    <h3 className="text-3xl font-serif italic text-[#FAFAFA]">{activeClientProject.name}</h3>
+                    <h3 className="text-3xl font-clash text-[#FAFAFA]">{activeClientProject.name}</h3>
                   </div>
                   
                   <button
@@ -247,7 +247,7 @@ const ClientPortal = ({
               <div className="flex flex-col gap-6">
                 <div>
                   <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">CLIENT // FEED</span>
-                  <h3 className="text-3xl font-serif italic text-[#FAFAFA]">Operational Commit Feed</h3>
+                  <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">Operational Commit Feed</h3>
                 </div>
 
                 <div className="flex flex-col gap-3 max-w-xl">
@@ -265,7 +265,7 @@ const ClientPortal = ({
               <div className="flex flex-col gap-6">
                 <div>
                   <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">CLIENT // APPROVALS</span>
-                  <h3 className="text-3xl font-serif italic text-[#FAFAFA]">Milestones approvals</h3>
+                  <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">Milestones approvals</h3>
                 </div>
 
                 <div className="max-w-md border border-[#151515] bg-[#070707] p-5 flex flex-col gap-3 rounded">

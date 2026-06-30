@@ -720,7 +720,7 @@ const Beranda = ({ isLoaded, t }) => {
       </div>
 
       <div className="max-w-4xl mt-4 hero-elem invisible">
-        <h2 className="text-4xl md:text-6xl font-serif font-normal leading-[1.2] tracking-tight text-[#FAFAFA]">
+        <h2 className="text-4xl md:text-6xl font-clash font-normal leading-[1.2] tracking-tight text-[#FAFAFA]">
           {t.hero.title1}<i className="text-[#D46B4A]">{t.hero.title1_i}</i><br />
           {t.hero.title2}<i className="text-[#D46B4A]">{t.hero.title2_i}</i>
         </h2>
@@ -732,7 +732,7 @@ const Beranda = ({ isLoaded, t }) => {
 
       <div className="mt-8 hero-elem invisible">
         <div className="relative pl-8 py-2 border-l border-[#D46B4A]">
-          <h3 className="text-2xl md:text-3xl font-serif text-[#FAFAFA] mb-3 font-bold">
+          <h3 className="text-2xl md:text-3xl font-clash text-[#FAFAFA] mb-3 font-bold">
             {t.hero.boxTitle}
           </h3>
           <p className="text-[#737373] text-lg font-light">{t.hero.boxDesc}</p>
@@ -771,8 +771,8 @@ const Statistik = ({ t }) => (
     <AnimatedSection stagger={true}>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 divide-y md:divide-y-0 md:divide-x divide-[#2A2A2A]">
         {t.stats.map((stat, idx) => (
-          <div key={idx} className="flex flex-col pt-8 md:pt-0 md:px-12 first:md:pl-0 last:md:pr-0 group">
-            <div className="text-6xl md:text-7xl font-serif font-bold text-[#FAFAFA] mb-4 tracking-tighter group-hover:text-[#D46B4A] transition-colors duration-500">{stat.num}</div>
+          <div key={idx} className="flex flex-col pt-8 md:pt-0 md:px-6 lg:px-12 first:md:pl-0 last:md:pr-0 group">
+            <div className="text-5xl md:text-5xl lg:text-6xl font-syne font-extrabold text-[#FAFAFA] mb-4 tracking-tighter group-hover:text-[#D46B4A] transition-colors duration-500">{stat.num}</div>
             <div className="text-sm font-mono font-bold text-[#D46B4A] uppercase tracking-[0.2em] mb-3">{stat.label}</div>
             <p className="text-[#A3A3A3] font-light leading-relaxed">{stat.desc}</p>
           </div>
@@ -790,7 +790,7 @@ const Layanan = ({ t }) => {
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 relative">
         <div className="lg:w-1/3 relative">
           <AnimatedSection className="sticky top-32">
-            <h2 className="text-4xl md:text-5xl font-serif text-[#FAFAFA] mb-6 font-bold">
+            <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
               {t.layanan.t1}<i className="text-[#D46B4A] italic">{t.layanan.t1_i}</i>
             </h2>
             <p className="text-[#A3A3A3] font-light text-lg">
@@ -808,7 +808,7 @@ const Layanan = ({ t }) => {
               >
                 <div className="text-2xl font-mono text-[#D46B4A] font-bold shrink-0">{item.num}</div>
                 <div className="flex flex-col gap-3">
-                  <h4 className="text-lg font-serif font-bold text-[#FAFAFA] tracking-wide">{item.title}</h4>
+                  <h4 className="text-lg font-clash font-bold text-[#FAFAFA] tracking-wide">{item.title}</h4>
                   <p className="text-[#A3A3A3] leading-relaxed font-light text-sm">
                     {item.desc}
                   </p>
@@ -822,7 +822,7 @@ const Layanan = ({ t }) => {
       <div className="flex flex-col lg:flex-row gap-12 lg:gap-24 border-t border-[#2A2A2A] pt-24 relative">
         <div className="lg:w-1/3 relative">
           <AnimatedSection className="sticky top-32">
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+            <h2 className="text-3xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
               {t.layanan.t2}<i className="text-[#D46B4A]">{t.layanan.t2_i}</i>
             </h2>
             <p className="text-[#A3A3A3] font-light text-lg">
@@ -847,7 +847,7 @@ const Layanan = ({ t }) => {
                   <div className="text-[10px] uppercase tracking-[0.2em] text-[#D46B4A] font-mono font-bold">{svc.id}</div>
                   <div className="w-8 h-[1px] bg-[#2A2A2A] group-hover:bg-[#D46B4A] transition-colors duration-500 group-hover:w-12"></div>
                 </div>
-                <h3 className="text-2xl font-serif font-bold text-[#FAFAFA] mb-4">{svc.title}</h3>
+                <h3 className="text-2xl font-clash font-bold text-[#FAFAFA] mb-4">{svc.title}</h3>
                 <p className="text-[#A3A3A3] leading-relaxed font-light">{svc.desc}</p>
               </div>
             ))}
@@ -864,7 +864,7 @@ const AboutUs = ({ t }) => (
     <div className="flex flex-col lg:flex-row gap-12 lg:gap-24">
       <div className="lg:w-1/3">
         <AnimatedSection className="sticky top-32">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+          <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
             {t.about.t1}<i className="text-[#D46B4A] italic">{t.about.t1_i}</i>
           </h2>
         </AnimatedSection>
@@ -886,7 +886,7 @@ const AboutUs = ({ t }) => (
     {/* BUSINESS SCHEME FLOW */}
     <div className="flex flex-col gap-12 border-t border-[#2A2A2A] pt-16">
       <AnimatedSection className="max-w-2xl">
-        <h3 className="text-3xl md:text-4xl font-serif font-bold text-[#FAFAFA] mb-6">
+        <h3 className="text-3xl md:text-4xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
           {t.about.t_skema}<i className="text-[#D46B4A]">{t.about.t_skema_i}</i>
         </h3>
         <p className="text-[#A3A3A3] font-light text-base">
@@ -901,7 +901,7 @@ const AboutUs = ({ t }) => (
               <div className="text-xs font-mono font-bold text-[#D46B4A] uppercase tracking-[0.2em] mb-4">
                 0{idx + 1} // Phase
               </div>
-              <h4 className="text-lg font-serif font-bold text-[#FAFAFA] mb-3 group-hover:text-[#D46B4A] transition-colors">
+              <h4 className="text-lg font-clash font-bold text-[#FAFAFA] mb-3 group-hover:text-[#D46B4A] transition-colors">
                 {phase.title}
               </h4>
             </div>
@@ -919,7 +919,7 @@ const AboutUs = ({ t }) => (
 const Partnership = ({ t, partnerships, lang }) => (
   <section id="partnership" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
     <AnimatedSection>
-      <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+      <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
         {t.partnership.t1}<i className="text-[#D46B4A]">{t.partnership.t1_i}</i>
       </h2>
       <p className="max-w-2xl text-[#A3A3A3] font-light text-lg">
@@ -929,7 +929,7 @@ const Partnership = ({ t, partnerships, lang }) => (
     <AnimatedSection stagger={true} className="grid grid-cols-1 md:grid-cols-3 gap-8">
       {partnerships.map((item, idx) => (
         <div key={item.id || idx} className="p-10 bg-[#111111]/30 backdrop-blur-sm border border-[#2A2A2A] hover:border-[#D46B4A] hover:-translate-y-2 hover:shadow-[0_10px_30px_rgba(212,107,74,0.06)] transition-all duration-500">
-          <h3 className="text-xl font-serif font-bold text-[#FAFAFA] mb-4">
+          <h3 className="text-xl font-clash font-bold text-[#FAFAFA] mb-4">
             {lang === 'id' ? (item.title_id || item.title) : (item.title_en || item.title || item.title_id)}
           </h3>
           <p className="text-[#A3A3A3] font-light leading-relaxed">
@@ -954,7 +954,7 @@ const OurWork = ({ t, publicWorks, lang, onOpenCaseStudy }) => {
       <AnimatedSection>
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 mb-6">
           <div>
-            <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+            <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
               {t.work.t1}<i className="text-[#D46B4A]">{t.work.t1_i}</i>
             </h2>
             <p className="max-w-2xl text-[#A3A3A3] font-light text-lg">
@@ -1015,7 +1015,7 @@ const OurWork = ({ t, publicWorks, lang, onOpenCaseStudy }) => {
               </div>
             </div>
             <div className="flex flex-col gap-2">
-              <h3 className="text-xl font-serif font-bold text-[#FAFAFA] group-hover:text-[#D46B4A] transition-colors">
+              <h3 className="text-xl font-clash font-bold text-[#FAFAFA] group-hover:text-[#D46B4A] transition-colors">
                 {item.title}
               </h3>
               <p className="text-[#737373] text-sm font-light leading-relaxed">
@@ -1039,7 +1039,7 @@ const OurWork = ({ t, publicWorks, lang, onOpenCaseStudy }) => {
 const OurTeam = ({ t }) => (
   <section id="team" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
     <AnimatedSection>
-      <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+      <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
         {t.team.t1}<i className="text-[#D46B4A]">{t.team.t1_i}</i>
       </h2>
       <p className="max-w-2xl text-[#A3A3A3] font-light text-lg">
@@ -1060,7 +1060,7 @@ const OurTeam = ({ t }) => (
           </div>
           <div className="flex flex-col gap-6">
             <div>
-              <h3 className="text-2xl font-serif font-bold text-[#FAFAFA] mb-1">{member.name}</h3>
+              <h3 className="text-2xl font-clash font-bold text-[#FAFAFA] mb-1">{member.name}</h3>
               <div className="text-xs font-mono text-[#D46B4A] uppercase tracking-[0.2em] font-bold">{member.role}</div>
             </div>
             <p className="text-[#A3A3A3] text-sm font-light leading-relaxed">
@@ -1069,7 +1069,7 @@ const OurTeam = ({ t }) => (
             <div className="pt-6 border-t border-[#2A2A2A] flex flex-col gap-4">
               <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-mono text-[#737373] uppercase tracking-widest font-bold">Experience</span>
-                <span className="text-sm text-[#FAFAFA] font-serif">{member.experience.role}</span>
+                <span className="text-sm text-[#FAFAFA] font-clash">{member.experience.role}</span>
               </div>
               <div className="flex flex-col gap-1">
                 <span className="text-[10px] font-mono text-[#737373] uppercase tracking-widest font-bold">Key Work</span>
@@ -1092,7 +1092,7 @@ const Doktrin = ({ t }) => (
   <section id="doktrin" className="flex flex-col lg:flex-row gap-12 lg:gap-24 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
     <div className="lg:w-1/3 relative">
       <AnimatedSection className="sticky top-32">
-        <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+        <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
           {t.doktrin.t1}<i className="text-[#D46B4A]">{t.doktrin.t1_i}</i>
         </h2>
         <p className="text-[#A3A3A3] font-light text-lg">
@@ -1108,7 +1108,7 @@ const Doktrin = ({ t }) => (
             key={index}
             className="flex flex-col md:flex-row gap-6 md:gap-12 py-10 border-b border-[#2A2A2A] transition-all duration-500 px-6 -mx-6 group hover:bg-[#111111]"
           >
-            <div className="font-serif italic font-bold text-2xl text-[#2A2A2A] group-hover:text-[#D46B4A] shrink-0 mt-[-4px] transition-colors">
+            <div className="font-syne font-extrabold text-2xl text-[#2A2A2A] group-hover:text-[#D46B4A] shrink-0 mt-[-4px] transition-colors">
               0{index + 1}
             </div>
             <p className="text-[#A3A3A3] group-hover:text-[#FAFAFA] text-base md:text-lg leading-relaxed font-light transition-colors">
@@ -1128,7 +1128,7 @@ const FAQ = ({ t }) => {
   return (
     <section id="faq" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
       <AnimatedSection>
-        <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+        <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
           {t.faq.t1}<i className="text-[#D46B4A]">{t.faq.t1_i}</i>
         </h2>
       </AnimatedSection>
@@ -1143,7 +1143,7 @@ const FAQ = ({ t }) => {
               <span className="text-lg md:text-xl font-medium text-[#FAFAFA] group-hover:text-[#D46B4A] transition-colors pr-8">
                 {faq.q}
               </span>
-              <span className="text-2xl font-serif font-light text-[#D46B4A] shrink-0 transition-transform duration-300">
+              <span className="text-2xl font-clash font-normal text-[#D46B4A] shrink-0 transition-transform duration-300">
                 {activeIndex === index ? '−' : '+'}
               </span>
             </button>
@@ -1164,12 +1164,71 @@ const FAQ = ({ t }) => {
 // --- BAGIAN 4.5: KATALOG BUNDEL ---
 const KatalogBundel = ({ t, onSelectBundle }) => {
   const [activeCategory, setActiveCategory] = useState('pos');
+  const [activeIndex, setActiveIndex] = useState(1);
+  const wheelRef = useRef(null);
+  const isScrolling = useRef(false);
+
+  const packages = t.bundel.packages[activeCategory];
+  const total = packages.length;
+
+  // Handle wheel scroll to rotate through cards
+  useEffect(() => {
+    const el = wheelRef.current;
+    if (!el) return;
+    const handleWheel = (e) => {
+      e.preventDefault();
+      if (isScrolling.current) return;
+      isScrolling.current = true;
+      if (e.deltaY > 0) {
+        setActiveIndex(prev => Math.min(prev + 1, total - 1));
+      } else {
+        setActiveIndex(prev => Math.max(prev - 1, 0));
+      }
+      setTimeout(() => { isScrolling.current = false; }, 600);
+    };
+    el.addEventListener('wheel', handleWheel, { passive: false });
+    return () => el.removeEventListener('wheel', handleWheel);
+  }, [total]);
+
+  // Reset to middle card when category changes
+  useEffect(() => {
+    setActiveIndex(1);
+  }, [activeCategory]);
+
+  const getCardStyle = (idx) => {
+    const offset = idx - activeIndex;
+    const absOffset = Math.abs(offset);
+    
+    // 3D water-wheel rotation
+    const rotateX = offset * -35;
+    const translateY = offset * 220;
+    const translateZ = -absOffset * 180;
+    const scale = 1 - absOffset * 0.15;
+    const opacity = absOffset > 1 ? 0.15 : absOffset === 1 ? 0.5 : 1;
+    const zIndex = 10 - absOffset;
+    const blur = absOffset > 0 ? absOffset * 2 : 0;
+
+    return {
+      transform: `perspective(1200px) rotateX(${rotateX}deg) translateY(${translateY}px) translateZ(${translateZ}px) scale(${scale})`,
+      opacity,
+      zIndex,
+      filter: blur > 0 ? `blur(${blur}px)` : 'none',
+      transition: 'all 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+      position: 'absolute',
+      top: '50%',
+      left: '50%',
+      marginLeft: '-240px',
+      marginTop: '-220px',
+      width: '480px',
+      pointerEvents: absOffset === 0 ? 'auto' : 'none',
+    };
+  };
 
   return (
     <section id="bundel" className="flex flex-col gap-16 pt-24 pb-12 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
       <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
         <AnimatedSection className="max-w-2xl">
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+          <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
             {t.bundel.t1}<i className="text-[#D46B4A] italic">{t.bundel.t1_i}</i>
           </h2>
           <p className="text-[#A3A3A3] font-light text-lg">
@@ -1194,70 +1253,71 @@ const KatalogBundel = ({ t, onSelectBundle }) => {
         </AnimatedSection>
       </div>
 
-      <AnimatedSection stagger={true} className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        {t.bundel.packages[activeCategory].map((pkg, idx) => {
-          const isFeatured = idx === 1;
-          return (
+      {/* Scroll wheel carousel */}
+      <div className="flex flex-col lg:flex-row gap-8 items-start">
+        {/* 3D Wheel Container */}
+        <div 
+          ref={wheelRef}
+          className="relative w-full lg:w-[520px] flex-shrink-0 overflow-hidden cursor-ns-resize"
+          style={{ height: '560px', perspective: '1200px' }}
+        >
+          {/* Scroll hint */}
+          <div className="absolute top-4 left-1/2 -translate-x-1/2 z-30 flex flex-col items-center gap-1 animate-pulse pointer-events-none">
+            <div className="text-[8px] font-mono text-[#737373] uppercase tracking-[0.3em]">Scroll</div>
+            <svg width="12" height="20" viewBox="0 0 12 20" fill="none" className="opacity-40">
+              <rect x="1" y="1" width="10" height="18" rx="5" stroke="#737373" strokeWidth="1.5"/>
+              <circle cx="6" cy="6" r="1.5" fill="#D46B4A">
+                <animate attributeName="cy" values="6;14;6" dur="2s" repeatCount="indefinite"/>
+              </circle>
+            </svg>
+          </div>
+
+          {packages.map((pkg, idx) => (
             <div
-              key={idx}
-              className={`flex flex-col p-10 bg-[#111111]/30 backdrop-blur-sm border transition-all duration-500 relative group justify-between hover:-translate-y-2 ${
-                isFeatured 
-                  ? 'border-[#D46B4A] shadow-[0_10px_35px_rgba(212,107,74,0.15)] scale-100 lg:scale-[1.02] hover:shadow-[0_20px_45px_rgba(212,107,74,0.3)]' 
-                  : 'border-[#2A2A2A] hover:border-[#D46B4A] hover:shadow-[0_10px_30px_rgba(212,107,74,0.1)]'
+              key={`${activeCategory}-${idx}`}
+              style={getCardStyle(idx)}
+              className={`flex flex-col p-8 md:p-10 bg-[#111111]/60 backdrop-blur-md border transition-all duration-500 relative group ${
+                idx === activeIndex
+                  ? 'border-[#D46B4A] shadow-[0_10px_50px_rgba(212,107,74,0.2)]'
+                  : 'border-[#2A2A2A]'
               }`}
             >
-              {isFeatured && (
+              {idx === 1 && (
                 <div className="absolute -top-3.5 right-6 bg-[#D46B4A] text-white font-mono text-[8px] font-bold uppercase tracking-[0.2em] px-3 py-1.5 border border-[#D46B4A]">
                   Recommended
                 </div>
               )}
               
-              <div>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="text-[10px] uppercase tracking-[0.2em] text-[#737373] font-mono font-bold">
-                    0{idx + 1} // {t.bundel.categories[activeCategory]}
-                  </div>
-                  <div className="text-[10px] font-mono text-[#D46B4A] uppercase tracking-[0.2em] font-bold">
-                    {pkg.duration}
-                  </div>
+              <div className="flex items-center justify-between mb-4">
+                <div className="text-[10px] uppercase tracking-[0.2em] text-[#737373] font-mono font-bold">
+                  0{idx + 1} // {t.bundel.categories[activeCategory]}
                 </div>
-
-                <h3 className="text-3xl font-serif font-bold text-[#FAFAFA] mb-4 group-hover:text-[#D46B4A] transition-colors">
-                  {pkg.name}
-                </h3>
-                
-                <p className="text-[#A3A3A3] text-sm font-light leading-relaxed mb-8 min-h-[3.5rem]">
-                  {pkg.desc}
-                </p>
-
-                <div className="border-t border-[#2A2A2A] py-6 mb-6">
-                  <div className="text-[9px] font-mono text-[#737373] uppercase tracking-[0.2em] font-bold mb-3">
-                    Target Impact
-                  </div>
-                  <div className="text-sm font-serif italic text-[#FAFAFA] pl-4 border-l border-[#D46B4A]">
-                    "{pkg.impact}"
-                  </div>
+                <div className="text-[10px] font-mono text-[#D46B4A] uppercase tracking-[0.2em] font-bold">
+                  {pkg.duration}
                 </div>
+              </div>
 
-                <div className="border-t border-[#2A2A2A] pt-6 mb-8">
-                  <div className="text-[9px] font-mono text-[#737373] uppercase tracking-[0.2em] font-bold mb-4">
-                    Key Features
-                  </div>
-                  <ul className="flex flex-col gap-3">
-                    {pkg.features.map((feature, fIdx) => (
-                      <li key={fIdx} className="flex items-start gap-3 text-xs text-[#A3A3A3] font-light leading-snug">
-                        <span className="text-[#D46B4A] font-mono select-none group-hover:scale-125 transition-transform duration-300">✦</span>
-                        <span>{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
+              <h3 className="text-2xl md:text-3xl font-clash font-bold text-[#FAFAFA] mb-3 group-hover:text-[#D46B4A] transition-colors">
+                {pkg.name}
+              </h3>
+              
+              <p className="text-[#A3A3A3] text-sm font-light leading-relaxed mb-6">
+                {pkg.desc}
+              </p>
+
+              <div className="border-t border-[#2A2A2A] py-4 mb-4">
+                <div className="text-[9px] font-mono text-[#737373] uppercase tracking-[0.2em] font-bold mb-2">
+                  Target Impact
+                </div>
+                <div className="text-sm font-clash italic text-[#FAFAFA] pl-4 border-l border-[#D46B4A]">
+                  "{pkg.impact}"
                 </div>
               </div>
 
               <button
                 onClick={() => onSelectBundle(pkg.name, t.bundel.categories[activeCategory])}
-                className={`w-full py-4 text-center font-mono font-bold uppercase tracking-[0.2em] text-xs transition-all duration-300 border ${
-                  isFeatured
+                className={`w-full py-3 text-center font-mono font-bold uppercase tracking-[0.2em] text-xs transition-all duration-300 border ${
+                  idx === 1
                     ? 'bg-[#FAFAFA] text-[#0A0A0A] border-[#FAFAFA] hover:bg-[#D46B4A] hover:text-white hover:border-[#D46B4A]'
                     : 'bg-transparent text-[#FAFAFA] border-[#2A2A2A] hover:border-[#D46B4A] hover:text-[#D46B4A]'
                 }`}
@@ -1265,12 +1325,55 @@ const KatalogBundel = ({ t, onSelectBundle }) => {
                 {t.bundel.pesan}
               </button>
             </div>
-          );
-        })}
-      </AnimatedSection>
+          ))}
+
+          {/* Progress dots */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-30 flex gap-3">
+            {packages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveIndex(idx)}
+                className={`transition-all duration-400 rounded-full ${
+                  idx === activeIndex
+                    ? 'w-8 h-2 bg-[#D46B4A]'
+                    : 'w-2 h-2 bg-[#2A2A2A] hover:bg-[#737373]'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+
+        {/* Side detail panel - shows features of the active card */}
+        <div className="flex-grow hidden lg:flex flex-col gap-6 pt-8">
+          <div className="text-[9px] font-mono text-[#D46B4A] uppercase tracking-[0.3em] font-bold">
+            ▪ Key Features — {packages[activeIndex]?.name}
+          </div>
+          <ul className="flex flex-col gap-4">
+            {packages[activeIndex]?.features.map((feature, fIdx) => (
+              <li 
+                key={fIdx} 
+                className="flex items-start gap-3 text-sm text-[#A3A3A3] font-light leading-relaxed"
+                style={{
+                  animation: `fadeSlideIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) ${fIdx * 0.08}s both`
+                }}
+              >
+                <span className="text-[#D46B4A] font-mono select-none mt-0.5">✦</span>
+                <span>{feature}</span>
+              </li>
+            ))}
+          </ul>
+          <button
+            onClick={() => onSelectBundle(packages[activeIndex]?.name, t.bundel.categories[activeCategory])}
+            className="mt-4 w-fit px-8 py-4 text-center font-mono font-bold uppercase tracking-[0.2em] text-xs transition-all duration-300 border bg-[#D46B4A] text-white border-[#D46B4A] hover:bg-[#c25a3a] hover:shadow-[0_6px_24px_rgba(212,107,74,0.4)]"
+          >
+            {t.bundel.pesan}
+          </button>
+        </div>
+      </div>
     </section>
   );
 };
+
 
 // --- BAGIAN 5: KONTAK ---
 const Kontak = ({ t, objective, setObjective }) => {
@@ -1280,7 +1383,7 @@ const Kontak = ({ t, objective, setObjective }) => {
   return (
     <section id="kontak" className="flex flex-col gap-16 pt-24 pb-24 scroll-mt-24 border-t border-[#2A2A2A] relative z-10">
       <AnimatedSection>
-        <h2 className="text-4xl md:text-5xl font-serif font-bold text-[#FAFAFA] mb-6">
+        <h2 className="text-4xl md:text-5xl font-syne font-extrabold tracking-tight text-[#FAFAFA] mb-6">
           {t.kontak.t1}<i className="text-[#D46B4A]">{t.kontak.t1_i}</i>
         </h2>
         <p className="max-w-2xl text-[#A3A3A3] font-light text-lg">
@@ -1297,7 +1400,7 @@ const Kontak = ({ t, objective, setObjective }) => {
                 type="text" 
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="bg-transparent border-b border-[#2A2A2A] focus:border-[#D46B4A] focus:shadow-[0_1px_0_0_#D46B4A] outline-none py-3 text-[#FAFAFA] font-serif transition-all duration-300" 
+                className="bg-transparent border-b border-[#2A2A2A] focus:border-[#D46B4A] focus:shadow-[0_1px_0_0_#D46B4A] outline-none py-3 text-[#FAFAFA] font-clash transition-all duration-300" 
                 placeholder={t.kontak.p1} 
               />
             </div>
@@ -1335,7 +1438,7 @@ const Kontak = ({ t, objective, setObjective }) => {
               <textarea 
                 value={objective}
                 onChange={(e) => setObjective(e.target.value)}
-                className="bg-transparent border-b border-[#2A2A2A] focus:border-[#D46B4A] focus:shadow-[0_1px_0_0_#D46B4A] outline-none py-3 text-[#FAFAFA] font-serif transition-all duration-300 resize-none h-28" 
+                className="bg-transparent border-b border-[#2A2A2A] focus:border-[#D46B4A] focus:shadow-[0_1px_0_0_#D46B4A] outline-none py-3 text-[#FAFAFA] font-clash transition-all duration-300 resize-none h-28" 
                 placeholder={t.kontak.p3}
               ></textarea>
             </div>
@@ -1375,7 +1478,7 @@ const Kontak = ({ t, objective, setObjective }) => {
             <div className="flex flex-col gap-10">
               <div>
                 <h4 className="text-[10px] text-[#737373] uppercase tracking-[0.2em] mb-3 font-mono font-bold">{t.kontak.h1}</h4>
-                <p className="text-[#FAFAFA] text-lg font-serif">{t.kontak.a1_1}<br/>{t.kontak.a1_2}</p>
+                <p className="text-[#FAFAFA] text-lg font-clash">{t.kontak.a1_1}<br/>{t.kontak.a1_2}</p>
               </div>
               <div>
                 <h4 className="text-[10px] text-[#737373] uppercase tracking-[0.2em] mb-3 font-mono font-bold">{t.kontak.h2}</h4>
@@ -1384,7 +1487,7 @@ const Kontak = ({ t, objective, setObjective }) => {
                     href="https://wa.me/6281237729115" 
                     target="_blank" 
                     rel="noreferrer" 
-                    className="text-[#FAFAFA] text-lg font-serif hover:text-[#D46B4A] transition-colors w-fit inline-flex items-center gap-1.5"
+                    className="text-[#FAFAFA] text-lg font-clash hover:text-[#D46B4A] transition-colors w-fit inline-flex items-center gap-1.5"
                   >
                     +62 812-3772-9115 <span className="text-xs text-[#D46B4A] font-sans">↗</span>
                   </a>
@@ -1392,7 +1495,7 @@ const Kontak = ({ t, objective, setObjective }) => {
                     href="https://www.instagram.com/dgt_lz?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" 
                     target="_blank" 
                     rel="noreferrer" 
-                    className="text-[#FAFAFA] text-lg font-serif hover:text-[#D46B4A] transition-colors w-fit inline-flex items-center gap-1.5"
+                    className="text-[#FAFAFA] text-lg font-clash hover:text-[#D46B4A] transition-colors w-fit inline-flex items-center gap-1.5"
                   >
                     @dgt_lz <span className="text-xs text-[#D46B4A] font-sans">↗</span>
                   </a>
@@ -1727,21 +1830,49 @@ const App = () => {
           color: #FAFAFA;
         }
         
+        /* Premium Typography Helper Classes */
+        .font-syne { 
+          font-family: 'Syne', sans-serif; 
+        }
+        .font-clash { 
+          font-family: 'Clash Display', sans-serif; 
+        }
+        .font-cabinet {
+          font-family: 'Cabinet Grotesk', sans-serif;
+        }
+        .font-mono { 
+          font-family: 'Space Mono', monospace; 
+        }
+        
         .font-maroni { 
           font-family: 'Syne', sans-serif; 
           font-weight: 800;
+          letter-spacing: -0.04em;
+        }
+        h1 {
+          font-family: 'Syne', sans-serif;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+        }
+        h2 {
+          font-family: 'Syne', sans-serif;
+          font-weight: 700;
           letter-spacing: -0.02em;
         }
-        h1, h2, h3, .font-serif { 
+        h3, h4, .font-serif { 
           font-family: 'Clash Display', sans-serif; 
         }
-        .font-mono { font-family: 'Space Mono', monospace; }
 
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(-50%); }
         }
         .animate-marquee { animation: marquee 30s linear infinite; }
+
+        @keyframes fadeSlideIn {
+          from { opacity: 0; transform: translateX(-12px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
 
         .no-scrollbar::-webkit-scrollbar {
           display: none;
@@ -1769,47 +1900,91 @@ const App = () => {
           scrollbar-color: rgba(212, 107, 74, 0.25) rgba(255, 255, 255, 0.02);
         }
 
-        /* ULTRA-MINIMALIST STYLING OVERRIDES */
-        /* Subtler borders globally */
-        [class*="border-[#2A2A2A]"] {
-          border-color: #151515 !important;
-        }
-        [class*="divide-[#2A2A2A]"] > * {
-          border-color: #151515 !important;
-        }
-        [class*="border-[#2A2A2A]/40"] {
-          border-color: rgba(255, 255, 255, 0.02) !important;
+        /* SOFT PREMIUM DESIGN OVERRIDES - COMFORTABLE & HIGH-END AESTHETIC */
+        
+        /* Softer, rounded corners for all structural containers, buttons, forms, and cards */
+        div.border,
+        [class*="border"],
+        button,
+        input,
+        select,
+        textarea,
+        [class*="rounded"] {
+          border-radius: 14px !important;
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
-        /* Transparent backgrounds for cards (removing heavy fills) */
+        /* Maintain full rounding for pill shapes / tags */
+        .rounded-full, [class*="rounded-full"],
+        span.w-3.h-3.rounded-full, span.w-4.h-4.rounded-full,
+        .rounded-sm, [class*="rounded-sm"] {
+          /* Small badges get a slightly smaller radius to avoid looking cartoonish */
+          border-radius: 6px !important;
+        }
+        
+        .rounded-full, [class*="rounded-full"],
+        [class*="bg-[#D46B4A]"].rounded-full {
+          border-radius: 9999px !important;
+        }
+
+        /* Softer border styling and premium semi-translucent backdrop blurs */
+        div.border, [class*="border"] {
+          border-color: rgba(255, 255, 255, 0.06) !important;
+        }
+        
+        /* Special accent hover borders */
+        [class*="hover:border-[#D46B4A]"]:hover,
+        .hover\:border-\[\#D46B4A\]:hover {
+          border-color: rgba(212, 107, 74, 0.8) !important;
+          box-shadow: 0 8px 30px rgba(212, 107, 74, 0.08) !important;
+        }
+
+        /* Smooth glass cards instead of flat sharp boxes */
         .grid div.bg-\\[\\#111111\\/30\\],
         .flex div.bg-\\[\\#111111\\/30\\],
         #team div.bg-\\[\\#111111\\/30\\],
-        #work div.bg-\\[\\#111111\\/30\\] {
-          background-color: transparent !important;
-          backdrop-filter: none !important;
+        #work div.bg-\\[\\#111111\\/30\\],
+        #about div.bg-\\[\\#111111\\/30\\],
+        #bundel div.bg-\\[\\#111111\\/30\\] {
+          background-color: rgba(255, 255, 255, 0.02) !important;
+          backdrop-filter: blur(12px) !important;
+          border: 1px solid rgba(255, 255, 255, 0.05) !important;
+          border-radius: 16px !important;
         }
 
-        /* Subtle form box container */
-        #kontak div.bg-\\[\\#111111\\] {
-          background-color: rgba(255, 255, 255, 0.01) !important;
-          border-color: #141414 !important;
+        /* Softer input styling */
+        input, select, textarea {
+          background-color: rgba(255, 255, 255, 0.02) !important;
+          border-color: rgba(255, 255, 255, 0.08) !important;
+          padding-left: 1rem !important;
+          padding-right: 1rem !important;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+          border-color: #D46B4A !important;
+          box-shadow: 0 0 15px rgba(212, 107, 74, 0.15) !important;
         }
 
-        /* Softer shadows for absolute minimalism */
-        [class*="hover:shadow-"], [class*="shadow-"] {
-          box-shadow: none !important;
+        /* Soft glowing active buttons */
+        button[class*="bg-[#D46B4A]"],
+        .bg-\[\#D46B4A\] {
+          box-shadow: 0 4px 20px rgba(212, 107, 74, 0.25) !important;
+        }
+        button[class*="bg-[#D46B4A]"]:hover,
+        .bg-\[\#D46B4A\]:hover {
+          box-shadow: 0 6px 24px rgba(212, 107, 74, 0.45) !important;
+          transform: translateY(-1px);
         }
 
         /* Dim the giant background watermark further for zero clutter */
         div.text-\\[18vw\\] {
-          opacity: 0.006 !important;
+          opacity: 0.003 !important;
         }
       `}} />
 
       {/* NAVBAR */}
       <nav className={`fixed top-0 left-0 z-50 w-full border-b border-[#2A2A2A] bg-[#0A0A0A]/80 backdrop-blur-lg transition-transform duration-500 ease-in-out ${showNav ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="max-w-7xl mx-auto px-6 md:px-12 h-24 flex items-center justify-between">
+        <div className="w-full max-w-7xl ml-0 mr-auto px-6 md:px-12 lg:px-16 h-24 flex items-center justify-between">
           <div 
             className="text-[#FAFAFA] font-maroni text-2xl tracking-tight flex items-baseline cursor-pointer mr-8"
             onClick={() => scrollToSection('manifesto')}
@@ -1893,7 +2068,7 @@ const App = () => {
       </nav>
 
       {/* MAIN CONTENT AREA */}
-      <main className="max-w-5xl mx-auto px-6 md:px-12 w-full flex-grow relative z-10 pt-24 flex flex-col">
+      <main className="w-full max-w-7xl ml-0 mr-auto px-6 md:px-12 lg:px-16 flex-grow relative z-10 pt-24 flex flex-col">
         <div className="order-1 lg:order-none"><Beranda isLoaded={isLoaded} t={t} /></div>
         <div className="order-2 lg:order-none"><Marquee t={t} /></div>
         <div className="order-3 lg:order-none"><Statistik t={t} /></div>
@@ -1925,7 +2100,7 @@ const App = () => {
               <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">
                 Case Study // DGT_LZ Impact
               </span>
-              <h3 className="text-3xl font-serif font-bold text-white mt-1">
+              <h3 className="text-3xl font-clash font-bold text-white mt-1">
                 {activeCaseStudy.title}
               </h3>
               <div className="flex gap-2 mt-3">
@@ -1971,7 +2146,7 @@ const App = () => {
 
       {/* GLOBAL FOOTER */}
       <footer className="border-t border-[#2A2A2A] mt-auto bg-[#0A0A0A] relative z-10">
-        <div className="max-w-5xl mx-auto px-6 md:px-12 py-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
+        <div className="w-full max-w-7xl ml-0 mr-auto px-6 md:px-12 lg:px-16 py-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-8">
           <div className="text-[#FAFAFA] font-maroni text-xl tracking-tight">
             DGT_LZ <span className="text-[#737373] text-xs ml-2 font-mono font-normal tracking-widest">© 2026</span>
           </div>

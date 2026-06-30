@@ -485,7 +485,7 @@ const AdminPortal = ({
         <div className="w-full max-w-sm border border-[#151515] bg-[#050505] p-8 flex flex-col gap-6 rounded shadow-[0_10px_30px_rgba(0,0,0,0.8)]">
           <div className="flex flex-col gap-1 border-b border-[#151515] pb-4">
             <span className="text-[10px] font-mono text-[#D46B4A] uppercase tracking-widest font-bold">SYSTEM ACCESS</span>
-            <h2 className="text-xl font-serif italic text-[#FAFAFA]">CEO Command Center</h2>
+            <h2 className="text-xl font-clash text-[#FAFAFA]">CEO Command Center</h2>
           </div>
 
           <form onSubmit={handleLogin} className="flex flex-col gap-4">
@@ -534,7 +534,7 @@ const AdminPortal = ({
       {/* Header */}
       <header className="border-b border-[#151515] flex items-center justify-between px-4 sm:px-8 h-[80px] shrink-0 z-20 bg-[#0D0D0D]">
         <div className="flex items-center gap-2 sm:gap-4">
-          <h1 className="font-serif text-2xl sm:text-[38px] leading-none tracking-[-1px] italic font-normal m-0 p-0 text-[#FAFAFA] hover:text-[#D46B4A] transition-colors cursor-pointer select-none">
+          <h1 className="font-maroni text-2xl sm:text-[38px] leading-none tracking-[-1px] m-0 p-0 text-[#FAFAFA] hover:text-[#D46B4A] transition-colors cursor-pointer select-none">
             Agency OS.
           </h1>
           <span className="text-[8px] font-mono text-[#D46B4A] border border-[#D46B4A]/20 px-2 py-0.5 rounded bg-[#D46B4A]/5 uppercase tracking-widest font-bold">V2.0</span>
@@ -567,8 +567,8 @@ const AdminPortal = ({
                   onClick={() => setActiveSubTab(item.id)}
                   className={`flex flex-row lg:flex-col items-baseline lg:items-start text-left group border-b lg:border-b border-transparent lg:border-[#151515] pb-1 lg:pb-3 shrink-0 gap-2 lg:gap-0 ${isActive ? 'opacity-100 border-[#D46B4A]' : 'opacity-40 hover:opacity-100'} transition-all`}
                 >
-                  <span className="font-serif italic text-[10px] lg:text-xs opacity-50 block text-[#D46B4A]">{item.number}</span>
-                  <span className={`font-serif text-sm lg:text-[22px] leading-tight whitespace-nowrap lg:whitespace-normal ${isActive ? 'text-[#D46B4A]' : 'text-[#FAFAFA]'}`}>
+                  <span className="font-clash italic text-[10px] lg:text-xs opacity-50 block text-[#D46B4A]">{item.number}</span>
+                  <span className={`font-clash text-sm lg:text-[22px] leading-tight whitespace-nowrap lg:whitespace-normal ${isActive ? 'text-[#D46B4A]' : 'text-[#FAFAFA]'}`}>
                     {item.label}
                   </span>
                 </button>
@@ -591,7 +591,7 @@ const AdminPortal = ({
               <div className="flex justify-between items-center">
                 <div>
                   <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">CEO // OVERVIEW</span>
-                  <h3 className="text-3xl font-serif italic text-[#FAFAFA]">Executive Summary</h3>
+                  <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">Executive Summary</h3>
                 </div>
                 <button
                   onClick={() => {
@@ -679,28 +679,28 @@ const AdminPortal = ({
                     <span className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)] flex-shrink-0"></span>
                     <div>
                       <span className="text-[8px] font-mono text-[#737373] block uppercase">CASH RUNWAY</span>
-                      <span className="text-xs font-serif text-white font-bold">{cashRunwayMonths} Bulan</span>
+                      <span className="text-xs font-mono text-white font-bold">{cashRunwayMonths} Bulan</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#151515]/60 rounded">
                     <span className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_rgba(34,197,94,0.5)] flex-shrink-0"></span>
                     <div>
                       <span className="text-[8px] font-mono text-[#737373] block uppercase">CAC EFFICENCY</span>
-                      <span className="text-xs font-serif text-white font-bold">Rasio 1:{ltvCacRatioVal}</span>
+                      <span className="text-xs font-mono text-white font-bold">Rasio 1:{ltvCacRatioVal}</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#151515]/60 rounded">
                     <span className="w-3 h-3 rounded-full bg-yellow-500 shadow-[0_0_10px_rgba(234,179,8,0.5)] flex-shrink-0"></span>
                     <div>
                       <span className="text-[8px] font-mono text-[#737373] block uppercase">RETENTION RATE</span>
-                      <span className="text-xs font-serif text-white font-bold">92% (Target 95%)</span>
+                      <span className="text-xs font-mono text-white font-bold">92% (Target 95%)</span>
                     </div>
                   </div>
                   <div className="flex items-center gap-3 p-3 bg-[#0a0a0a] border border-[#151515]/60 rounded">
                     <span className="w-3 h-3 rounded-full bg-red-500 shadow-[0_0_10px_rgba(239,68,68,0.5)] animate-pulse flex-shrink-0"></span>
                     <div>
                       <span className="text-[8px] font-mono text-[#737373] block uppercase">PROJECT RISKS</span>
-                      <span className="text-xs font-serif text-white font-bold">1 At Risk (PT Maju)</span>
+                      <span className="text-xs font-mono text-white font-bold">1 At Risk (PT Maju)</span>
                     </div>
                   </div>
                 </div>
@@ -710,17 +710,17 @@ const AdminPortal = ({
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
                 <div className="border border-[#151515] p-5 bg-[#070707] rounded hover:border-[#D46B4A]/40 transition-colors">
                   <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider block font-bold">REVENUE (MRR)</span>
-                  <span className="text-lg font-serif text-[#FAFAFA] block mt-2">Rp 125.000.000</span>
+                  <span className="text-lg font-mono text-[#FAFAFA] block mt-2">Rp 125.000.000</span>
                   <span className="text-[8px] font-mono text-green-500 block mt-1">🟢 Stable</span>
                 </div>
                 <div className="border border-[#151515] p-5 bg-[#070707] rounded hover:border-[#D46B4A]/40 transition-colors">
                   <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider block font-bold">CRM PIPELINE</span>
-                  <span className="text-lg font-serif text-[#FAFAFA] block mt-2">Rp {pipelineValueTotal.toLocaleString('id-ID')}</span>
+                  <span className="text-lg font-mono text-[#FAFAFA] block mt-2">Rp {pipelineValueTotal.toLocaleString('id-ID')}</span>
                   <span className="text-[8px] font-mono text-green-500 block mt-1">🟢 Growing</span>
                 </div>
                 <div className="border border-[#151515] p-5 bg-[#070707] rounded hover:border-[#D46B4A]/40 transition-colors">
                   <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider block font-bold">EXPENSES</span>
-                  <span className="text-lg font-serif text-[#D46B4A] block mt-2">Rp {expenses.toLocaleString('id-ID')}</span>
+                  <span className="text-lg font-mono text-[#D46B4A] block mt-2">Rp {expenses.toLocaleString('id-ID')}</span>
                   <span className="text-[8px] font-mono text-[#737373] block mt-1">Total Ledger Cost</span>
                 </div>
                 <div className="border border-[#151515] p-5 bg-[#070707] rounded hover:border-[#D46B4A]/40 transition-colors">
@@ -728,7 +728,7 @@ const AdminPortal = ({
                     <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider block font-bold">CAC (COST)</span>
                     <span className="text-[7px] font-mono bg-[#111] text-[#737373] px-1 border border-[#222]">LTV:CAC 1:{ltvCacRatioVal}</span>
                   </div>
-                  <span className="text-lg font-serif text-[#FAFAFA] block mt-2">Rp {calculatedCacVal.toLocaleString('id-ID')}</span>
+                  <span className="text-lg font-mono text-[#FAFAFA] block mt-2">Rp {calculatedCacVal.toLocaleString('id-ID')}</span>
                   <span className="text-[8px] font-mono text-green-500 block mt-1">🟢 Efficient</span>
                 </div>
                 <div className="border border-[#151515] p-5 bg-[#070707] rounded hover:border-[#D46B4A]/40 transition-colors">
@@ -736,12 +736,12 @@ const AdminPortal = ({
                     <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider block font-bold">RUNWAY</span>
                     <span className="text-[7px] font-mono bg-[#111] text-[#737373] px-1 border border-[#222]">Kas: Rp {currentTotalCash.toLocaleString('id-ID')}</span>
                   </div>
-                  <span className="text-lg font-serif text-[#FAFAFA] block mt-2">{cashRunwayMonths} Bulan</span>
+                  <span className="text-lg font-mono text-[#FAFAFA] block mt-2">{cashRunwayMonths} Bulan</span>
                   <span className="text-[8px] font-mono text-green-500 block mt-1">🟢 Healthy (&gt;12m)</span>
                 </div>
                 <div className="border border-[#151515] p-5 bg-[#070707] rounded hover:border-[#D46B4A]/40 transition-colors">
                   <span className="text-[9px] font-mono text-[#737373] uppercase tracking-wider block font-bold">RETENTION</span>
-                  <span className="text-lg font-serif text-[#FAFAFA] block mt-2">92%</span>
+                  <span className="text-lg font-mono text-[#FAFAFA] block mt-2">92%</span>
                   <span className="text-[8px] font-mono text-yellow-500 block mt-1">🟡 Warn (Target 95%)</span>
                 </div>
               </div>
@@ -751,7 +751,7 @@ const AdminPortal = ({
                 <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-[#151515] pb-4 mb-6">
                   <div>
                     <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">BI // BUSINESS INTELLIGENCE SYSTEMS</span>
-                    <h4 className="text-xl font-serif text-white italic">Pusat Integrasi Analitik Live</h4>
+                    <h4 className="text-xl font-clash text-white">Pusat Integrasi Analitik Live</h4>
                   </div>
                   <div className="flex flex-wrap gap-1.5 bg-[#0a0a0a] p-1 border border-[#151515] rounded">
                     <button
@@ -1002,7 +1002,7 @@ const AdminPortal = ({
                     <div key={member.id} className="border border-[#151515] bg-[#070707] p-4 flex justify-between items-center rounded">
                       <div>
                         <div className="flex items-center gap-2">
-                          <h4 className="font-serif text-white text-sm">{member.name}</h4>
+                          <h4 className="font-clash text-white text-sm">{member.name}</h4>
                           <span className={`text-[7px] font-mono px-1.5 py-0.5 rounded border ${member.status === 'Available' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20'}`}>{member.status}</span>
                         </div>
                         <span className="text-[9px] text-[#737373] font-mono">{member.role} // Allocation: {member.utilization}%</span>
@@ -1042,7 +1042,7 @@ const AdminPortal = ({
               <div className="flex justify-between items-center">
                 <div>
                   <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">CEO // RELATIONSHIPS</span>
-                  <h3 className="text-3xl font-serif italic text-[#FAFAFA]">CRM & Pipeline</h3>
+                  <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">CRM & Pipeline</h3>
                 </div>
                 <button
                   onClick={() => {
@@ -1124,14 +1124,14 @@ const AdminPortal = ({
                     <div key={lead.id} className="border border-[#151515] bg-[#070707] p-5 flex justify-between items-center hover:border-[#D46B4A] transition-all duration-300 rounded">
                       <div>
                         <div className="flex items-center gap-3">
-                          <h4 className="font-serif text-[#FAFAFA] text-base">{lead.clientName}</h4>
+                          <h4 className="font-clash text-[#FAFAFA] text-base">{lead.clientName}</h4>
                           <span className={`font-mono text-[8px] px-2 py-0.5 rounded border border-[#151515] uppercase font-bold ${lead.status === 'Draft' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : 'bg-[#111] text-[#FAFAFA]'}`}>{lead.status}</span>
                         </div>
                         <p className="text-[#737373] text-[11px] mt-1">{lead.brief}</p>
                         <span className="font-mono text-[8px] text-[#737373] mt-2 block">CONTACT: {lead.contact} // {lead.email}</span>
                       </div>
                       <div className="flex flex-col items-end gap-2">
-                        <span className="font-serif text-sm">Rp {lead.value.toLocaleString('id-ID')}</span>
+                        <span className="font-mono text-sm">Rp {lead.value.toLocaleString('id-ID')}</span>
                         <div className="flex gap-2">
                           <button
                             onClick={() => startAiPitch(lead)}
@@ -1185,7 +1185,7 @@ const AdminPortal = ({
               <div className="flex justify-between items-center">
                 <div>
                   <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">CEO // PROJECTS</span>
-                  <h3 className="text-3xl font-serif italic text-[#FAFAFA]">Project Oversight</h3>
+                  <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">Project Oversight</h3>
                 </div>
                 <button
                   onClick={() => {
@@ -1287,7 +1287,7 @@ const AdminPortal = ({
                   <div key={p.id} className="border border-[#151515] bg-[#070707] p-5 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 rounded">
                     <div>
                       <div className="flex items-center gap-3">
-                        <h4 className="font-serif text-[#FAFAFA] text-base">{p.name}</h4>
+                        <h4 className="font-clash text-[#FAFAFA] text-base">{p.name}</h4>
                         <span className={`text-[7px] font-mono font-bold px-1.5 py-0.5 rounded border ${p.status === 'Draft' ? 'bg-yellow-500/10 text-yellow-400 border-yellow-500/20' : (p.status === 'At Risk' ? 'bg-red-500/10 text-red-400 border-red-500/20' : 'bg-green-500/10 text-green-400 border-green-500/20')}`}>{p.status}</span>
                         <span className="text-[8px] font-mono text-[#737373]">PHASE: {p.phase}</span>
                       </div>
@@ -1326,7 +1326,7 @@ const AdminPortal = ({
             <div className="flex flex-col gap-8">
               <div>
                 <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">CEO // PUBLISH CENTER</span>
-                <h3 className="text-3xl font-serif italic text-[#FAFAFA]">Publish Portal Update</h3>
+                <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">Publish Portal Update</h3>
               </div>
 
               <div className="max-w-md border border-[#151515] bg-[#070707] p-6 rounded">
@@ -1371,7 +1371,7 @@ const AdminPortal = ({
               <div className="flex justify-between items-center border-b border-[#151515] pb-2">
                 <div>
                   <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">CEO // TRANSACTIONS & TRANSPARENCY</span>
-                  <h3 className="text-3xl font-serif italic text-[#FAFAFA]">Commit Feed & Ledger</h3>
+                  <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">Commit Feed & Ledger</h3>
                 </div>
                 <button
                   onClick={() => {
@@ -1452,7 +1452,7 @@ const AdminPortal = ({
                         </div>
                       </div>
                       <div className="flex items-center gap-4">
-                        <span className={`font-serif text-sm ${trx.type === 'Income' ? 'text-green-400' : 'text-red-400'}`}>Rp {trx.amount.toLocaleString('id-ID')}</span>
+                        <span className={`font-mono text-sm ${trx.type === 'Income' ? 'text-green-400' : 'text-red-400'}`}>Rp {trx.amount.toLocaleString('id-ID')}</span>
                         <div className="flex gap-2">
                           <button
                             onClick={() => handleEditTransaction(trx)}
@@ -1493,7 +1493,7 @@ const AdminPortal = ({
               {/* ... AI Brain conversational terminal code unchanged ... */}
               <div>
                 <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">AI BRAIN // AGENT GPT</span>
-                <h3 className="text-3xl font-serif italic text-[#FAFAFA]">Conversational Terminal</h3>
+                <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">Conversational Terminal</h3>
               </div>
 
               <div className="border border-[#151515] bg-[#050505] p-5 flex flex-col justify-between h-[340px] rounded relative max-w-xl">
@@ -1538,7 +1538,7 @@ const AdminPortal = ({
               {/* ... AI Blueprints code unchanged ... */}
               <div>
                 <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">AI BRAIN // BLUEPRINTS</span>
-                <h3 className="text-3xl font-serif italic text-[#FAFAFA]">Preset Queries</h3>
+                <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">Preset Queries</h3>
               </div>
 
               <div className="flex flex-col gap-2 max-w-md font-mono text-[9px]">
@@ -1574,7 +1574,7 @@ const AdminPortal = ({
             <div className="flex flex-col gap-8">
               <div>
                 <span className="text-[9px] font-mono text-[#D46B4A] uppercase font-bold tracking-widest">CEO // WEB CONTENT MANAGER</span>
-                <h3 className="text-3xl font-serif italic text-[#FAFAFA]">Manage Public Landing Page</h3>
+                <h3 className="text-3xl font-syne font-extrabold tracking-tight text-[#FAFAFA]">Manage Public Landing Page</h3>
               </div>
 
               {/* Sub-sections: Works and Partnerships */}
@@ -1723,7 +1723,7 @@ const AdminPortal = ({
                       <div key={work.id} className="border border-[#151515] bg-[#0a0a0a] p-4 flex justify-between items-start rounded">
                         <div className="flex flex-col gap-1.5 max-w-[70%]">
                           <div className="flex items-center gap-2">
-                            <span className="font-serif text-white text-sm font-bold">{work.title}</span>
+                            <span className="font-clash text-white text-sm font-bold">{work.title}</span>
                             <span className="text-[7px] font-mono bg-[#151515] border border-[#222] text-[#D46B4A] px-1.5 py-0.5 rounded">
                               {(work.tags || []).join(', ')}
                             </span>
@@ -1810,7 +1810,7 @@ const AdminPortal = ({
                     {partnerships.map((partner) => (
                       <div key={partner.id} className="border border-[#151515] bg-[#0a0a0a] p-4 flex justify-between items-start rounded">
                         <div className="flex flex-col gap-1 max-w-[70%]">
-                          <div className="font-serif text-white text-sm font-bold">
+                          <div className="font-clash text-white text-sm font-bold">
                             ID: {partner.title_id} / EN: {partner.title_en}
                           </div>
                           <p className="text-[8px] text-[#737373] font-mono line-clamp-2">ID: {partner.desc_id}</p>
